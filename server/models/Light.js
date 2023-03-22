@@ -1,18 +1,30 @@
 //////=========================================================================
 // LOAD MONGOOSE
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 //////=========================================================================
 // DEFINE MODEL/SCHEMA
 const lightSchema = mongoose.Schema({
-    name: String,
+  roomId: {
+    type: mongoose.Schema.ObjectId,
+    required: true,
+  },
+  name: {
     type: String,
-    status: Boolean,
-    brightness: Number,
-    canAdjustAutomatically: Boolean
-})
+    unique: true,
+    required: true,
+  },
+  type: String,
+  status: Boolean,
+  brightness: {
+    type: Number,
+    min: 0,
+    max: 100
+  },
+  canAdjustAutomatically: Boolean,
+});
 //
 
 //////=========================================================================
 // EXPORT MODULE
-module.exports = mongoose.model('Light', lightSchema);
+module.exports = mongoose.model("Light", lightSchema);
