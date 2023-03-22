@@ -12,5 +12,4 @@ const networkSchema = mongoose.Schema({
 
 //////=========================================================================
 // EXPORT MODULE
-const Network = mongoose.model('Network', networkSchema);
-module.exports = Network;
+module.exports = mongoose.model('Network', networkSchema);

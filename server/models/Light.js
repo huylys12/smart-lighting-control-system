@@ -15,5 +15,4 @@ const lightSchema = mongoose.Schema({
 
 //////=========================================================================
 // EXPORT MODULE
-const Light = mongoose.model('Light', lightSchema);
-module.exports = Light;
+module.exports = mongoose.model('Light', lightSchema);
