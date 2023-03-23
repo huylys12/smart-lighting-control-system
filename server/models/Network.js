@@ -5,22 +5,10 @@ const mongoose = require("mongoose");
 //////=========================================================================
 // DEFINE MODEL/SCHEMA
 const networkSchema = mongoose.Schema({
-  users: [
-    {
-      userId: {
-        type: mongoose.Schema.ObjectId,
-        required: true
-      },
-      role: {
-        type: String,
-        enum: {
-          values: ['Admin', 'User'],
-          message: '{VALUE} is not a type of role'
-        },
-        required: true
-      }
-    }
-  ],
+  userId: {
+    type: mongoose.Schema.ObjectId,
+    required: true,
+  },
   name: {
     type: String,
     unique: true,
