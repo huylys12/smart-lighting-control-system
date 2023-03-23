@@ -32,7 +32,6 @@ const networkSchema = mongoose.Schema({
   },
   canAdjustAutomatically: Boolean,
 });
-//
 
 //////=========================================================================
 // EXPORT MODULE

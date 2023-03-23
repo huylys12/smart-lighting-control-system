@@ -23,7 +23,6 @@ const lightSchema = mongoose.Schema({
   },
   canAdjustAutomatically: Boolean,
 });
-//
 
 //////=========================================================================
 // EXPORT MODULE

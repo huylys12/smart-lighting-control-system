@@ -20,7 +20,6 @@ const userSchema = mongoose.Schema({
     required: true,
   }
 });
-//
 
 //////=========================================================================
 // EXPORT MODULE
