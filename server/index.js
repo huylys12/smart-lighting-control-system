@@ -33,8 +33,8 @@ passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
 passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
+  User.findById(id).then(user => {
+    done(null, user);
   });
 });
 
@@ -46,24 +46,7 @@ const corsOptions = {
 }
 app.use(cors(corsOptions));
 
-
-app.get("/", function(req, res){
-  res.send("Hello");
-});
-
-
 const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
-});
-
-// 404 Error
-app.use((req, res, next) => {
-  next(createError(404));
-});
-
-app.use((err, req, res, next) => {
-  console.error(err.message);
-  if (!err.statusCode) err.statusCode = 500;
-  res.status(err.statusCode).send(err.message);
 });
