@@ -78,15 +78,16 @@ module.exports = class NetworksController {
   }
 
   async updateNetwork(req, res) {
+    const networkId = req.params.networkId;
     const { id, userId, name, location, canAdjustAutomatically } = req.body;
 
     Network.updateOne(
-      { id: id },
+      { id: networkId },
       {
         $set: {
           userId: userId,
           name: name,
-          location: locaiton,
+          location: location,
           canAdjustAutomatically: canAdjustAutomatically,
         },
       }
@@ -103,7 +104,7 @@ module.exports = class NetworksController {
   }
 
   async deleteNetwork(req, res) {
-    const networkId = req.params.betworkId;
+    const networkId = req.params.networkId;
     Network.deleteOne({ id: networkId })
       .then((result) => {
         res.status(200).json({ success: true, msg: "Network deleted" });

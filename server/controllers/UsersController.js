@@ -1,11 +1,7 @@
 const User = require("../models/User");
-/* A middleware that creates a session for the user. */
-const session = require("express-session");
 const passport = require("passport");
-const passportLocal = require("passport-local");
-const passportLocalMongoose = require("passport-local-mongoose");
 
-class UsersController {
+module.exports = class UsersController {
   async register(req, res) {
     User.register({ username: req.body.username }, req.body.password, function (err, user) {
       if (err) {
@@ -63,5 +59,3 @@ class UsersController {
 
   async authentication(req, res) {}
 }
-
-module.exports = new UsersController();
