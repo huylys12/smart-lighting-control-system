@@ -1,5 +1,5 @@
 const express = require("express");
-const NetworksController = require("../controller/NetworksController");
+const NetworksController = require("../controllers/NetworksController");
 
 module.exports = class NetworksRouter {
   router = express.Router();

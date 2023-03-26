@@ -5,10 +5,7 @@ const mongoose = require("mongoose");
 //////=========================================================================
 // DEFINE MODEL/SCHEMA
 const roomSchema = mongoose.Schema({
-  networkId: {
-    type: mongoose.Schema.ObjectId,
-    required: true,
-  },
+  networkId: mongoose.Schema.ObjectId,
   name: {
     type: String,
     unique: true,
@@ -16,7 +13,7 @@ const roomSchema = mongoose.Schema({
   },
   type: String,
   status: Boolean,
-  brightness:  {
+  brightness: {
     type: Number,
     min: 0,
     max: 100

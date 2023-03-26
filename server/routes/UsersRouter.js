@@ -1,5 +1,5 @@
 const express = require("express");
-const UsersController = require("../controller/UsersController");
+const UsersController = require("../controllers/UsersController");
 
 module.exports = class UsersRouter {
   router = express.Router();
@@ -9,6 +9,5 @@ module.exports = class UsersRouter {
     this.router.post("/register", this.usersController.register);
 
     this.router.post("/login", this.usersController.login);
-
   }
 };

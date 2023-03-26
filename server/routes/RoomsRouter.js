@@ -1,5 +1,5 @@
 const express = require("express");
-const RoomsController = require("../controller/RoomsController");
+const RoomsController = require("../controllers/RoomsController");
 
 module.exports = class RoomsRouter {
   router = express.Router();

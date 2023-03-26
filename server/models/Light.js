@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const lightSchema = mongoose.Schema({
   roomId: {
     type: mongoose.Schema.ObjectId,
-    required: true,
+    // required: true,
   },
   name: {
     type: String,
