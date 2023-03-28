@@ -1,7 +1,10 @@
+server/package-lock.json
 server/node_modules
 server/.env
+client/.env
 client/node_modules/
 client/.expo/
+client/package-lock.json
 
 # macOS
 .DS_Store
