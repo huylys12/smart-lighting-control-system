@@ -24,24 +24,24 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // This is a middleware that creates a session.
-// app.use(
-//   session({
-//     secret: process.env.SECRET_KEY,
-//     resave: false,
-//     saveUninitialized: false,
-//   })
-// );
-// app.use(passport.initialize());
-// app.use(passport.session());
-// passport.use(User.createStrategy());
-// passport.serializeUser(function (user, done) {
-//   done(null, user.id);
-// });
-// passport.deserializeUser(function (id, done) {
-//   User.findById(id).then((user) => {
-//     done(null, user);
-//   });
-// });
+app.use(
+  session({
+    secret: process.env.SECRET_KEY,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(User.createStrategy());
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+passport.deserializeUser(function (id, done) {
+  User.findById(id).then((user) => {
+    done(null, user);
+  });
+});
 
 // This is a CORS middleware. It allows the server to accept requests from a different domain.
 const corsOptions = {

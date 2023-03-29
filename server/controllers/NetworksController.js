@@ -2,7 +2,7 @@ const Network = require("../models/Network");
 
 module.exports = class NetworksController {
   async getAllNetworks(req, res) {
-    Network.find()
+    await Network.find()
       .then((networks) => {
         res.status(200).json({
           sucess: true,
