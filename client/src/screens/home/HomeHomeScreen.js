@@ -1,9 +1,7 @@
-import { StyleSheet, Text, View, Dimensions, Switch } from "react-native";
+import { StyleSheet, Text, View, Switch, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import GroupsOutlineIcon from "react-native-vector-icons/MaterialIcons";
 import React, { useState } from "react";
-
-const { width } = Dimensions.get("window");
 
 export default function HomeHomeScreen({ navigation }) {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -13,10 +11,18 @@ export default function HomeHomeScreen({ navigation }) {
   };
   return (
     <View style={styles.container}>
-      <View style={styles.intro}>
-        <Text style={styles.intro.subtitle}>I’m always here to help you!</Text>
-        <Text style={styles.intro.subtitle}>Call me by</Text>
-        <Text style={styles.intro.title}>"Hey Max"</Text>
+      <View style={styles.intro.container}>
+        <View>
+          <Text style={styles.intro.subtitle}>
+            I’m always here to help you!
+          </Text>
+          <Text style={styles.intro.subtitle}>Call me by</Text>
+          <Text style={styles.intro.title}>"Hey Max"</Text>
+        </View>
+        <Image
+          style={styles.intro.image}
+          source={require("../../../assets/images/bot.png")}
+        />
       </View>
       <View style={styles.roomList.roomGrid}>
         <View style={styles.roomItem.container}>
@@ -61,6 +67,7 @@ export default function HomeHomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  
   container: {
     flex: 1,
     padding: 16,
@@ -69,14 +76,23 @@ const styles = StyleSheet.create({
     justifyContent: "start",
   },
   intro: {
-    backgroundColor: "#4B61DD",
-    padding: 16,
-    width: "100%",
-    borderRadius: 8,
+    container: {
+      backgroundColor: "#4B61DD",
+      padding: 16,
+      width: "100%",
+      borderRadius: 8,
+      flexDirection: "row",
+      paddingTop: 24,
+    },
+    image: {
+      width: 120,
+      height: 100,
+    },
     title: {
       color: "white",
       fontSize: 28,
       fontWeight: "bold",
+      marginVertical: 8,
     },
     subtitle: {
       color: "#E1E1E1",
@@ -106,9 +122,9 @@ const styles = StyleSheet.create({
     },
     top: {
       flexDirection: "row",
-      justifyContent: 'space-between',
+      justifyContent: "space-between",
       marginBottom: 8,
-    }
+    },
   },
   roomList: {
     roomGrid: {
