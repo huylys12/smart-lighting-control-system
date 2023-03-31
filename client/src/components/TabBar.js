@@ -2,7 +2,7 @@ import { View } from "react-native";
 import { useRoute } from '@react-navigation/native';
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-export default function TabBar({ focused, color, size }) {
+export default function Notification({ focused, color, size }) {
   var iconName = "";
   const route = useRoute();
   switch (route.name) {
