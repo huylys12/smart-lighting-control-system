@@ -7,7 +7,7 @@ export default function InforCard({section, subsection}){
             borderRadius: 15, 
             paddingHorizontal: 5,
             paddingVertical: 10, 
-            marginTop: 5,
+            marginTop: 8,
             borderColor:"#384EC7"}}>
             <Text style={{color:"#384EC7"}}>{section}</Text>
             <Text style={{color:"#384EC7",opacity: 0.5}}>{subsection}</Text>

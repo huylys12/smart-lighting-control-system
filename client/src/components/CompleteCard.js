@@ -7,7 +7,7 @@ export default function CompletedCard({section,subsection}){
             borderRadius: 15, 
             paddingHorizontal: 5,
             paddingVertical: 10, 
-            marginTop: 5,
+            marginTop: 8,
             backgroundColor:"#F1F0FD",
             display:"flex",
             flexDirection:"row",
