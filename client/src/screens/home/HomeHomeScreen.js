@@ -1,4 +1,12 @@
-import { StyleSheet, Text, View, Switch, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Switch,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import GroupsOutlineIcon from "react-native-vector-icons/MaterialIcons";
 import React, { useState } from "react";
@@ -24,56 +32,211 @@ export default function HomeHomeScreen({ navigation }) {
           source={require("../../../assets/images/bot.png")}
         />
       </View>
-      <View style={styles.roomList.roomGrid}>
-        <View style={styles.roomItem.container}>
-          <View style={styles.roomItem.top}>
-            <GroupsOutlineIcon
-              name="groups"
-              type="outline"
-              size={24}
-              color="#0E0E17"
-            />
-            <Switch
-              trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
-              thumbColor={"#fff"}
-              onValueChange={toggleSwitch}
-              value={isEnabled}
-            />
-          </View>
-          <Text style={styles.roomItem.title}>Living Room</Text>
-          <Text style={styles.roomItem.subtitle}>3 Lights</Text>
-        </View>
-        <View style={styles.roomItem.container}>
-          <View style={styles.roomItem.top}>
-            <GroupsOutlineIcon
-              name="groups"
-              type="outline"
-              size={24}
-              color="#0E0E17"
-            />
-            <Switch
-              trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
-              thumbColor={"#fff"}
-              onValueChange={toggleSwitch}
-              value={isEnabled}
-            />
-          </View>
-          <Text style={styles.roomItem.title}>Living Room</Text>
-          <Text style={styles.roomItem.subtitle}>3 Lights</Text>
-        </View>
+      <View style={styles.sizeBox}></View>
+      <View style={styles.roomList.roomHeader.container}>
+        <Text style={styles.roomList.roomHeader.title}>Rooms</Text>
+        <TouchableOpacity style={styles.roomList.roomHeader.button.container}>
+          <Text style={styles.roomList.roomHeader.button.text}>Add room</Text>
+        </TouchableOpacity>
       </View>
+      <ScrollView>
+        <View style={styles.roomList.roomGrid}>
+          <View style={styles.roomItem.container}>
+            <View style={styles.roomItem.top}>
+              <GroupsOutlineIcon
+                name="groups"
+                type="outline"
+                size={24}
+                color="#0E0E17"
+              />
+              <Switch
+                trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
+                thumbColor={"#fff"}
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+              />
+            </View>
+            <Text style={styles.roomItem.title}>Living Room</Text>
+            <Text style={styles.roomItem.subtitle}>3 Lights</Text>
+          </View>
+          <View style={styles.roomItem.container}>
+            <View style={styles.roomItem.top}>
+              <GroupsOutlineIcon
+                name="groups"
+                type="outline"
+                size={24}
+                color="#0E0E17"
+              />
+              <Switch
+                trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
+                thumbColor={"#fff"}
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+              />
+            </View>
+            <Text style={styles.roomItem.title}>Living Room</Text>
+            <Text style={styles.roomItem.subtitle}>3 Lights</Text>
+          </View>
+          <View style={styles.roomItem.container}>
+            <View style={styles.roomItem.top}>
+              <GroupsOutlineIcon
+                name="groups"
+                type="outline"
+                size={24}
+                color="#0E0E17"
+              />
+              <Switch
+                trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
+                thumbColor={"#fff"}
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+              />
+            </View>
+            <Text style={styles.roomItem.title}>Living Room</Text>
+            <Text style={styles.roomItem.subtitle}>3 Lights</Text>
+          </View>
+          <View style={styles.roomItem.container}>
+            <View style={styles.roomItem.top}>
+              <GroupsOutlineIcon
+                name="groups"
+                type="outline"
+                size={24}
+                color="#0E0E17"
+              />
+              <Switch
+                trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
+                thumbColor={"#fff"}
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+              />
+            </View>
+            <Text style={styles.roomItem.title}>Living Room</Text>
+            <Text style={styles.roomItem.subtitle}>3 Lights</Text>
+          </View>
+          <View style={styles.roomItem.container}>
+            <View style={styles.roomItem.top}>
+              <GroupsOutlineIcon
+                name="groups"
+                type="outline"
+                size={24}
+                color="#0E0E17"
+              />
+              <Switch
+                trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
+                thumbColor={"#fff"}
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+              />
+            </View>
+            <Text style={styles.roomItem.title}>Living Room</Text>
+            <Text style={styles.roomItem.subtitle}>3 Lights</Text>
+          </View>
+          <View style={styles.roomItem.container}>
+            <View style={styles.roomItem.top}>
+              <GroupsOutlineIcon
+                name="groups"
+                type="outline"
+                size={24}
+                color="#0E0E17"
+              />
+              <Switch
+                trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
+                thumbColor={"#fff"}
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+              />
+            </View>
+            <Text style={styles.roomItem.title}>Living Room</Text>
+            <Text style={styles.roomItem.subtitle}>3 Lights</Text>
+          </View>
+          <View style={styles.roomItem.container}>
+            <View style={styles.roomItem.top}>
+              <GroupsOutlineIcon
+                name="groups"
+                type="outline"
+                size={24}
+                color="#0E0E17"
+              />
+              <Switch
+                trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
+                thumbColor={"#fff"}
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+              />
+            </View>
+            <Text style={styles.roomItem.title}>Living Room</Text>
+            <Text style={styles.roomItem.subtitle}>3 Lights</Text>
+          </View>
+          <View style={styles.roomItem.container}>
+            <View style={styles.roomItem.top}>
+              <GroupsOutlineIcon
+                name="groups"
+                type="outline"
+                size={24}
+                color="#0E0E17"
+              />
+              <Switch
+                trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
+                thumbColor={"#fff"}
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+              />
+            </View>
+            <Text style={styles.roomItem.title}>Living Room</Text>
+            <Text style={styles.roomItem.subtitle}>3 Lights</Text>
+          </View>
+          <View style={styles.roomItem.container}>
+            <View style={styles.roomItem.top}>
+              <GroupsOutlineIcon
+                name="groups"
+                type="outline"
+                size={24}
+                color="#0E0E17"
+              />
+              <Switch
+                trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
+                thumbColor={"#fff"}
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+              />
+            </View>
+            <Text style={styles.roomItem.title}>Living Room</Text>
+            <Text style={styles.roomItem.subtitle}>3 Lights</Text>
+          </View>
+          <View style={styles.roomItem.container}>
+            <View style={styles.roomItem.top}>
+              <GroupsOutlineIcon
+                name="groups"
+                type="outline"
+                size={24}
+                color="#0E0E17"
+              />
+              <Switch
+                trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
+                thumbColor={"#fff"}
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+              />
+            </View>
+            <Text style={styles.roomItem.title}>Living Room</Text>
+            <Text style={styles.roomItem.subtitle}>3 Lights</Text>
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  
   container: {
     flex: 1,
     padding: 16,
     paddingTop: 32,
     backgroundColor: "#fff",
     justifyContent: "start",
+  },
+  sizeBox: {
+    height: 24,
   },
   intro: {
     container: {
@@ -127,6 +290,27 @@ const styles = StyleSheet.create({
     },
   },
   roomList: {
+    roomHeader: {
+      container: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+      },
+      title: {
+        fontSize: 22,
+        fontWeight: 600,
+        color: "#1f1f1f",
+      },
+      button: {
+        container: {
+          padding: 6
+        },
+        text: {
+          fontWeight: 600,
+          fontSize: 15,
+          color: "#384EC7",
+        }
+      }
+    },
     roomGrid: {
       flexDirection: "row",
       flexWrap: "wrap",
