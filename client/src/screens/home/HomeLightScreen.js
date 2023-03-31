@@ -19,6 +19,12 @@ export default function HomeLightScreen({ navigation, route }) {
   }, [navigation, name]);
 
   const [sliderValue, setSliderValue] = useState(0);
+
+  const [isEnabled, setIsEnabled] = useState(true);
+
+  const toggleSwitch = () => {
+    setIsEnabled((previousState) => !previousState);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.info.container}>
@@ -33,7 +39,15 @@ export default function HomeLightScreen({ navigation, route }) {
           </View>
           <View>
             <Text style={styles.infoItem.subtitle}>Status</Text>
-            <Text style={styles.infoItem.title}>On</Text>
+            <View style={styles.rowFlex}>
+              <Text style={styles.infoItem.title}>{isEnabled ? "On" : "Off"}</Text>
+              <Switch
+                trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
+                thumbColor={"#fff"}
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+              />
+            </View>
           </View>
           <View>
             <Text style={styles.infoItem.subtitle}>Timer</Text>
@@ -73,7 +87,12 @@ const styles = StyleSheet.create({
     justifyContent: "start",
   },
   sizeBox: {
-    height: 24
+    height: 24,
+  },
+  rowFlex: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   info: {
     container: {
@@ -87,9 +106,9 @@ const styles = StyleSheet.create({
       height: 100,
     },
     infoList: {
-      flex:1,
-      paddingLeft: 16
-    }
+      flex: 1,
+      paddingLeft: 16,
+    },
   },
   infoItem: {
     title: {
