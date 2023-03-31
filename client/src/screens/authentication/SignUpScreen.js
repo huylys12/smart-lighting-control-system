@@ -31,7 +31,7 @@ export default function SignUpScreen({navigation}) {
         </TouchableOpacity>
       </View>
       <Text style={styles.passwordInfo}>Your password must have at least 8 characters</Text>
-      <TouchableOpacity style={styles.signUpButton} onPress={() => navigation.navigate('Welcome')}>
+      <TouchableOpacity style={styles.signUpButton} onPress={() => navigation.navigate('LogIn')}>
         <Text style={styles.signUpButtonText}>Sign Up</Text>
       </TouchableOpacity>
       <Text style={styles.agreementText}>
