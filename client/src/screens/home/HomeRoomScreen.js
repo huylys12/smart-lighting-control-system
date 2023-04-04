@@ -64,7 +64,7 @@ export default function HomeRoomScreen({ navigation, route }) {
           <View style={styles.lightItem.container}>
             <View style={styles.lightItem.content}>
               <Text style={styles.infoItem.title}>Pendant Lamp</Text>
-              <Text style={styles.infoItem.subtitle}>On</Text>
+              <Text style={styles.infoItem.subtitle}>{isEnabled ? "On" : "Off"}</Text>
             </View>
             <Switch
               trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
@@ -77,50 +77,8 @@ export default function HomeRoomScreen({ navigation, route }) {
         <TouchableOpacity onPress={handleTapLight}>
           <View style={styles.lightItem.container}>
             <View style={styles.lightItem.content}>
-              <Text style={styles.infoItem.title}>Pendant Lamp</Text>
-              <Text style={styles.infoItem.subtitle}>On</Text>
-            </View>
-            <Switch
-              trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
-              thumbColor={"#fff"}
-              onValueChange={toggleSwitch}
-              value={isEnabled}
-            />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleTapLight}>
-          <View style={styles.lightItem.container}>
-            <View style={styles.lightItem.content}>
-              <Text style={styles.infoItem.title}>Pendant Lamp</Text>
-              <Text style={styles.infoItem.subtitle}>On</Text>
-            </View>
-            <Switch
-              trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
-              thumbColor={"#fff"}
-              onValueChange={toggleSwitch}
-              value={isEnabled}
-            />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleTapLight}>
-          <View style={styles.lightItem.container}>
-            <View style={styles.lightItem.content}>
-              <Text style={styles.infoItem.title}>Pendant Lamp</Text>
-              <Text style={styles.infoItem.subtitle}>On</Text>
-            </View>
-            <Switch
-              trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
-              thumbColor={"#fff"}
-              onValueChange={toggleSwitch}
-              value={isEnabled}
-            />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleTapLight}>
-          <View style={styles.lightItem.container}>
-            <View style={styles.lightItem.content}>
-              <Text style={styles.infoItem.title}>Pendant Lamp</Text>
-              <Text style={styles.infoItem.subtitle}>On</Text>
+              <Text style={styles.infoItem.title}>Recessed fixtures</Text>
+              <Text style={styles.infoItem.subtitle}>Off</Text>
             </View>
             <Switch
               trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
