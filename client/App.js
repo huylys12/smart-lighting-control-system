@@ -14,7 +14,6 @@ export default function App() {
       <HistoryStack.Navigator>
         <HistoryStack.Screen
           name="App"
-          // component={Navigation}
           component={AuthenticationStack}
           options={{ headerShown: false }}
         />
