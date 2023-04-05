@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Navigation from "./src/screens/Navigation";
+import AuthenticationStack from "./src/screens/authentication/AuthenticationStack";
 
 const HistoryStack = createNativeStackNavigator();
 
@@ -13,7 +14,7 @@ export default function App() {
       <HistoryStack.Navigator>
         <HistoryStack.Screen
           name="App"
-          component={Navigation}
+          component={AuthenticationStack}
           options={{ headerShown: false }}
         />
       </HistoryStack.Navigator>
