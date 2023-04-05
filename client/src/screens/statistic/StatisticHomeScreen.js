@@ -41,7 +41,7 @@ export default function StatisticHomeScreen({navigation }) {
             <Text style={{fontWeight:900}}>Energy Saving</Text>
             <Picker 
               selectedValue={selected}
-              style={{ height: 50, width: 150,borderWidth:10}}
+              style={{ height: 50, width: 150,borderWidth: 1, borderColor: 'black'}}
               onValueChange={(itemValue, itemIndex) => setSelected(itemValue)}
             >
               <Picker.Item label='Week' value="Week" />
@@ -49,9 +49,9 @@ export default function StatisticHomeScreen({navigation }) {
             </Picker>
         </View>
         <View style={styles.chart}>
-          <Statistic data={selected == "Week" ? data.week:data.month} />
+          <Statistic data={selected == "Week" ? data.week:data.month} type={selected} />
         </View>
-        <Text style={{fontWeight:900}}>Expense from Device</Text>
+        <Text style={{fontWeight:900,marginVertical:8}}>Expense from Device</Text>
         <DeviceInforCard name={"Living Room"} percent={20} device={"bulb-outline"} />
         <DeviceInforCard name={"Dining Room"} percent={30} device={"bulb-outline"} />
         <DeviceInforCard name={"Bed Room"} percent={50} device={"bulb-outline"} />

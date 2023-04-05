@@ -1,9 +1,12 @@
 import { VictoryChart, VictoryBar, VictoryGroup} from "victory-native";
+import { Dimensions, ScrollView } from 'react-native';
 
 
-export default function Statistic({data}){
+export default function Statistic({data, type}){
     return (
-      <VictoryChart domainPadding={{ x: 15 }}>
+      <ScrollView horizontal={true}>
+      <VictoryChart domainPadding={{ x: 15 }} width={type == "Month" ? 500: Dimensions.get("screen").width}>
+        
         <VictoryGroup offset={10}>
           <VictoryBar
             alignment='middle'
@@ -15,6 +18,8 @@ export default function Statistic({data}){
             }}
           />
         </VictoryGroup>
+        
       </VictoryChart>
+      </ScrollView>
     )
 }
