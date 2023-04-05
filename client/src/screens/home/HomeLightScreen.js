@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: "#fff",
-    justifyContent: "start",
+    justifyContent: "flex-start",
   },
   sizeBox: {
     height: 24,
