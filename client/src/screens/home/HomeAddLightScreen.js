@@ -37,31 +37,61 @@ export default function HomeAddRoomScreen({ navigation}) {
                 // alignItems: 'stretch',
                 margin: 16,
             }}
+            style={{backgroundColor: "white"}}
         >
-        <View style={{marginVertical: 8}}>
+        
             <FloatingLabelInput
                 label="Light Name"
                 value={roomName}
                 keyboardType="ascii-capable"
                 onChangeText={value => setRoomName(value)}
+                customLabelStyles={{colorFocused:"#717171",colorBlurred:"#717171"}}
+                containerStyles={{
+                    borderWidth: 1,
+                    paddingHorizontal: 8,
+                    backgroundColor: '#ffffff',
+                    borderColor: '#E1E1E1',
+                    borderRadius: 8,
+                    marginBottom:8,
+                    height: 60
+                }}
             />
-        </View>
-        <View style={{marginVertical: 8}}>
+        
+       
             <FloatingLabelInput
                 label="Brightness Feed Key"
                 value={brightnessFK}
                 keyboardType="ascii-capable"
                 onChangeText={value => setBrightnessFK(value)}
+                customLabelStyles={{colorFocused:"#717171",colorBlurred:"#717171"}}
+                containerStyles={{
+                    borderWidth: 1,
+                    paddingHorizontal: 8,
+                    backgroundColor: '#ffffff',
+                    borderColor: '#E1E1E1',
+                    borderRadius: 8,
+                    marginBottom:8,
+                    height: 60
+                }}
             />
-        </View>
-        <View style={{marginVertical: 8}}>
+        
+        
             <FloatingLabelInput
                 label="Color Feed Key"
                 value={colorFK}
                 keyboardType="ascii-capable"
                 onChangeText={value => setColorFK(value)}
+                customLabelStyles={{colorFocused:"#717171",colorBlurred:"#717171"}}
+                containerStyles={{
+                    borderWidth: 1,
+                    paddingHorizontal: 8,
+                    backgroundColor: '#ffffff',
+                    borderColor: '#E1E1E1',
+                    borderRadius: 8,
+                    marginBottom:8,
+                    height: 60
+                }}
             />
-        </View>
         </ScrollView>
     );
 }
