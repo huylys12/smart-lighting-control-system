@@ -26,6 +26,9 @@ export default function HomeRoomScreen({ navigation, route }) {
   const handleTapLight = () => {
     return navigation.navigate("HomeLight", {name: "Pendant Lamp"})
   };
+  const handleTapAddLight = () => {
+    return navigation.navigate("HomeAddLight");
+  };
   return (
     <View style={styles.container}>
       <View style={styles.infoGrid}>
@@ -53,7 +56,7 @@ export default function HomeRoomScreen({ navigation, route }) {
       <View style={styles.lightList.lightHeader.container}>
         <Text style={styles.lightList.lightHeader.title}>Lights</Text>
         <TouchableOpacity style={styles.lightList.lightHeader.button.container}>
-          <Text style={styles.lightList.lightHeader.button.text}>
+          <Text style={styles.lightList.lightHeader.button.text} onPress={handleTapAddLight}>
             Add light
           </Text>
         </TouchableOpacity>
@@ -98,7 +101,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: "#fff",
-    justifyContent: "start",
+    justifyContent: "flex-start",
   },
   sizeBox: {
     height: 16,

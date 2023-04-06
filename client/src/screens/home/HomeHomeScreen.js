@@ -23,13 +23,16 @@ export default function HomeHomeScreen({ navigation, route }) {
     return navigation.navigate('HomeRoom', {
       name: "Living Room"});
   };
-
+  
+  const handleTapAddRoom = () => {
+    return navigation.navigate("HomeAddRoom");
+  }
   return (
     <View style={styles.container}>
       <View style={styles.intro.container}>
         <View>
           <Text style={styles.intro.subtitle}>
-            I’m always here to help you!
+            I'm always here to help you!
           </Text>
           <Text style={styles.intro.subtitle}>Call me by</Text>
           <Text style={styles.intro.title}>"Hey Max"</Text>
@@ -43,7 +46,7 @@ export default function HomeHomeScreen({ navigation, route }) {
       <View style={styles.roomList.roomHeader.container}>
         <Text style={styles.roomList.roomHeader.title}>Rooms</Text>
         <TouchableOpacity style={styles.roomList.roomHeader.button.container}>
-          <Text style={styles.roomList.roomHeader.button.text}>Add room</Text>
+          <Text style={styles.roomList.roomHeader.button.text} onPress={handleTapAddRoom}>Add room</Text>
         </TouchableOpacity>
       </View>
       <ScrollView>
@@ -242,7 +245,7 @@ const styles = StyleSheet.create({
     padding: 16,
     paddingTop: 32,
     backgroundColor: "#fff",
-    justifyContent: "start",
+    justifyContent: "flex-start",
   },
   sizeBox: {
     height: 24,

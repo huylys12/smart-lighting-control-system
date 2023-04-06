@@ -28,7 +28,7 @@ export default function ScheduleHomeScreen({navigation}) {
         </Tooltip>
         <View style={{marginHorizontal: 16}}>
           <Text style={{opacity: 0.5,color:"#384EC7"}}>Friday</Text>
-          <Text style={{fontSize: 20,color:"#384EC7"}}>10 March</Text>
+          <Text style={{fontSize: 20,color:"#384EC7",fontWeight:700}}>10 March</Text>
         </View>
       </View>
       <View style={styles.view_2}>
@@ -43,15 +43,15 @@ export default function ScheduleHomeScreen({navigation}) {
           <TouchableOpacity style={{borderWidth: 0.3, padding: 5, borderRadius: 25,marginRight: 8,backgroundColor:"#384EC7"}}><Text style={{color:"white"}}>My Schedules</Text></TouchableOpacity>
           <TouchableOpacity style={{borderWidth: 0.3, padding: 5, borderRadius: 25,borderColor:"#384EC7"}}><Text style={{color:'#4B61DD'}}>Scenes</Text></TouchableOpacity>
         </View>
-        <TouchableOpacity style={{fontWeight: 600}} onPress={() => setDisplayCanlendar(true)}><Text style={{color:'#4B61DD'}}>+ New</Text></TouchableOpacity>
+        <TouchableOpacity style={{fontWeight: 600}} onPress={() => setDisplayCanlendar(true)}><Text style={{color:'#4B61DD',fontWeight:700}}>+ New</Text></TouchableOpacity>
       </View>
       <InforCard section={"Pendant Lamp in Living Room"} subsection={"2 hrs - 11.30 pm"} />
       <InforCard section={"Recessed fixtured in Living Room"} subsection={"1 hrs - 16.30 am"} />
       <View>
         <View style={{display:"flex",flexDirection:"row",justifyContent:"space-between",alignItems:"center"}}>
           <View style={{display:"flex",flexDirection:"row",alignItems:"center",marginVertical: 16}}>
-            <Ionicons name="checkmark-outline" size={20} style={{color:"#384EC7"}} />
-            <Text style={{marginLeft: 8,color:"#384EC7"}}>Completed</Text>
+            <Ionicons name="checkmark-outline" size={20} style={{color:"#384EC7",fontWeight:700}} />
+            <Text style={{marginLeft: 8,color:"#384EC7",fontWeight:700}}>Completed</Text>
           </View>
           <Ionicons name="chevron-down-outline" size={20} style={{color: "#384EC7"}} onPress={() => {
             if(completedVisible){
@@ -61,16 +61,21 @@ export default function ScheduleHomeScreen({navigation}) {
             
           }} />
         </View>
-        {
+      </View>
+      {
           completedVisible ? (
-            <View>
+            <ScrollView>
               <CompletedCard section={"Training"} subsection={"2 hrs - 11.30 pm"} />
               <CompletedCard section={"Training"} subsection={"2 hrs - 11.30 pm"} />
               <CompletedCard section={"Training"} subsection={"2 hrs - 11.30 pm"} />
-            </View>
+              <CompletedCard section={"Training"} subsection={"2 hrs - 11.30 pm"} />
+              <CompletedCard section={"Training"} subsection={"2 hrs - 11.30 pm"} />
+              <CompletedCard section={"Training"} subsection={"2 hrs - 11.30 pm"} />
+              <CompletedCard section={"Training"} subsection={"2 hrs - 11.30 pm"} />
+              <CompletedCard section={"Training"} subsection={"2 hrs - 11.30 pm"} />
+            </ScrollView>
           ): null
         }
-      </View>
       {displayCalendar ? (
          <ScrollView style={styles.overlay}>
           <View style={{display:"flex",alignItems:"center",marginTop: 8}}>
@@ -89,25 +94,25 @@ export default function ScheduleHomeScreen({navigation}) {
             </View>
             <View style={{display:"flex",flexDirection:"row",width:Dimensions.get('screen').width*0.95, alignItems:"center",justifyContent: "space-between",borderTopWidth: 0.5,paddingVertical:8}}>
               <Text style={{color:"#384EC7"}}>Select Room</Text>
-              <View style={{borderWidth: 0.3,borderRadius: 25}}>
+              {/* <View style={{borderWidth: 0.3,borderRadius: 25}}> */}
                 <Picker
                   style={{ width: 150,height:50,color:"#384EC7"}}
                 >
                   <Picker.Item label='Living Room' value="Living Room" />
                   <Picker.Item label='Bed Room' value="Bed Room" />
                 </Picker>
-              </View>
+              {/* </View> */}
             </View>
             <View style={{display:"flex",flexDirection:"row",width:Dimensions.get('screen').width*0.95, alignItems:"center",justifyContent: "space-between",borderTopWidth: 0.5,paddingVertical:8,borderBottomWidth: 0.5}}>
               <Text style={{color:"#384EC7"}}>Select Lamp</Text>
-              <View style={{borderWidth: 0.3,borderRadius: 25}}>
+              {/* <View style={{borderWidth: 0.3,borderRadius: 25}}> */}
                 <Picker
                   style={{ width: 150,height:50, color:"#384EC7"}}
                 >
                   <Picker.Item label='Lamp 1' value="Lamp 1" />
                   <Picker.Item label='Lamp 2' value="Lamp 2" />
                 </Picker>
-              </View>
+              {/* </View> */}
             </View>
             <TouchableOpacity
             style={{backgroundColor: "#4B61DD",width: Dimensions.get('screen').width*0.9,marginTop:10,borderRadius:25,marginBottom: 16}}
