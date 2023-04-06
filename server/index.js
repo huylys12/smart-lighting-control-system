@@ -50,13 +50,13 @@ app.get("/", function (req, res) {
 });
 
 const usersRouter = new UsersRouter();
-const networksRouter = new NetworksRouter();
-const roomsRouter = new RoomsRouter();
-const lightsRouter = new LightsRouter();
+// const networksRouter = new NetworksRouter();
+// const roomsRouter = new RoomsRouter();
+// const lightsRouter = new LightsRouter();
 app.use("/api/accounts", usersRouter.router);
-app.use("/api/networks", networksRouter.router);
-app.use("/api/rooms", roomsRouter.router);
-app.use("/api/lights", lightsRouter.router);
+// app.use("/api/networks", networksRouter.router);
+// app.use("/api/rooms", roomsRouter.router);
+// app.use("/api/lights", lightsRouter.router);
 
 const port = process.env.PORT;
 app.listen(port, () => {
