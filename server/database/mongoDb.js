@@ -9,7 +9,7 @@ class MongoDB {
   static lock = false;
 
   static getInstance() {
-    // This is a simple lock to ensure that only one instance of the class is created. 
+    // This is a simple lock to ensure that only one instance of the class is created.
     while (MongoDB.lock) {}
     MongoDB.lock = true;
 
@@ -32,6 +32,7 @@ class MongoDB {
     mongoose
       .connect(process.env.MONGO_DB_URI, {
         useNewUrlParser: true,
+        useUnifiedTopology: true,
       })
       .then(() => {
         console.log("Connected successfully to MongoDB server");

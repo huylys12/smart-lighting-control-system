@@ -1,5 +1,10 @@
 const express = require("express");
-const UsersController = require("../controller/UsersController");
+const UsersController = require("../controllers/UsersController");
+const passport = require("passport");
+const {
+  verifyUserWithJwt,
+  verifyUserWithLocal
+} = require("../utils/authenticate");
 
 module.exports = class UsersRouter {
   router = express.Router();
@@ -8,7 +13,14 @@ module.exports = class UsersRouter {
   constructor() {
     this.router.post("/register", this.usersController.register);
 
-    this.router.post("/login", this.usersController.login);
+    this.router.post("/login", verifyUserWithLocal, this.usersController.login);
 
+    this.router.post("/refreshToken", this.usersController.refreshToken);
+
+    this.router.get("/logout", verifyUserWithJwt, this.usersController.logout);
+
+    this.router.get("/me", verifyUserWithJwt, (req, res) => {
+      res.send(req.user)
+    })
   }
 };

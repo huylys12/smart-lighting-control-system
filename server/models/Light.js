@@ -7,14 +7,14 @@ const mongoose = require("mongoose");
 const lightSchema = mongoose.Schema({
   roomId: {
     type: mongoose.Schema.ObjectId,
-    required: true,
   },
   name: {
     type: String,
-    unique: true,
-    required: true,
   },
-  type: String,
+  type: {
+    type: String,
+    enum: ['color', 'brightness']
+  },
   status: Boolean,
   brightness: {
     type: Number,
@@ -22,6 +22,9 @@ const lightSchema = mongoose.Schema({
     max: 100
   },
   canAdjustAutomatically: Boolean,
+  brightnessFeedKey: String,
+  colorFeedKey: String,
+  statusFeedKey: String
 });
 
 //////=========================================================================
