@@ -83,7 +83,7 @@ export default function SignUpScreen({navigation}) {
   
       </View>
     )}
-      <Text style={styles.passwordInfo}>You will use this email address to log in.</Text>
+      
       <View style={[styles.inputBox,!isValidPassword && { borderColor: 'red' }]}>
       {isFocusedPassword && <Text style={styles.title}>Password</Text>}
         <TextInput placeholder="Enter your Password" 
@@ -113,7 +113,7 @@ export default function SignUpScreen({navigation}) {
         </TouchableOpacity>
       </View>
     )}
-      <Text style={styles.passwordInfo}>Your password must have at least 8 characters</Text>
+     
       <TouchableOpacity style={styles.signUpButton} onPress={() => { if (isValidEmail && isValidPassword) {
       navigation.navigate('LogIn');
     }}}>
@@ -138,21 +138,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     
   },
- notificationBox: {
-    
+  notificationBox: {
     borderColor: '#FF4D4D',
+    
     borderRadius: 5,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'left', // align content horizontally to the left
     justifyContent: 'center',
     paddingHorizontal: 10,
     paddingVertical: 5,
-    marginTop: 15,
+    top: 15,
+    left: 10,
+    alignSelf: 'flex-start',
   },
   notificationText: {
     color: '#FF4D4D',
     fontSize: 14,
     fontWeight: 'bold',
+    textAlign: 'left',
   },
   notificationButton: {
     display: 'none',
