@@ -5,7 +5,7 @@ export default function NotificationHomeScreen({navigation }) {
   return (
     <ScrollView>
       <View style={style.container}>
-      <View style={{marginHorizontal:10}}>
+      <View style={{marginHorizontal:16}}>
         <View>
             <Text style={style.title}>New</Text>
             <Notification text={'Brightness of living room is just too low'} hour={'5m ago'}name={'alert-circle-outline'} color={'#599BF9'}bgcolor={'#E1E1E1'} />
