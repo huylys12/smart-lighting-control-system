@@ -42,12 +42,8 @@ export default function LogInScreen({navigation}) {
   return (
     <View style={styles.container}>
       
-      <View style={{ paddingLeft: 10, paddingBottom: 40 }}>
-  <Text style={styles.signUpText} >Sign In</Text>
-  </View>
-  <View style={{ flexDirection: 'column' ,top:10}}>
-    <Text style={styles.welcomeText}>Hello! Welcome Back</Text>
-  </View>
+      <Text style={styles.signUpText}>Log In</Text>
+      <Text style={styles.welcomeText}>Hello! Welcome Back</Text>
 
       
      
@@ -172,7 +168,9 @@ const styles = StyleSheet.create({
   
   signUpText: {
     position: 'absolute',
-    left:-165,
+    top: 30,
+    left: 16,
+    width: 132,
     height: 40,
     fontWeight: '700',
     fontSize: 34,
@@ -181,14 +179,14 @@ const styles = StyleSheet.create({
   },
   welcomeText: {
     position: 'absolute',
-   left:-165,
+    top: 80,
+    left: 16,
     width: 343,
     height: 39,
     fontWeight: '400',
     fontSize: 17,
     lineHeight: 22,
     color: '#000000',
-    
   },
   title: {
     position: 'absolute',
@@ -204,8 +202,12 @@ const styles = StyleSheet.create({
     borderColor: 'red',
     borderRadius: 5
   },
+  firstbox:{
+    marginTop: 0,
+  },
   inputBox: {
     marginTop: 20,
+    
     width: 343,
     height: 58,
     paddingHorizontal: 12,
