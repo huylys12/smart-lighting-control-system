@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Ionicons from "react-native-vector-icons/Ionicons";
-export default function Information({text ,hour,name}) {
+export default function InformationAccount({text ,hour,name}) {
   return (
     <View style={style.button}>
       <Icon style={{textAlign:'left',top:20}} name={name} color={"blue"} size={40} />  
@@ -15,8 +15,7 @@ export default function Information({text ,hour,name}) {
       </View>
       
     </View>
-    
-    
+
   )
 }
 const style = StyleSheet.create({

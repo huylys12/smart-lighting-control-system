@@ -2,7 +2,7 @@ import { StyleSheet, Text, View ,Image} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Avatar } from "react-native-paper";
-export default function ProfileNameComponents({name}) {
+export default function ProfileName({name}) {
     return (
       <View style={style.container}>
        

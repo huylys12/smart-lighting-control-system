@@ -11,7 +11,7 @@ export default function ProfileStack() {
         component={ProfileHomeScreen}
       />
       <HistoryStack.Screen
-        name="Profile"
+        name="ProfileEdit"
         component={ProfileEditScreen}
       />
     </HistoryStack.Navigator>
