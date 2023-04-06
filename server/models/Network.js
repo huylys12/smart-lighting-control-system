@@ -6,8 +6,7 @@ const mongoose = require("mongoose");
 // DEFINE MODEL/SCHEMA
 const networkSchema = mongoose.Schema({
   userId: {
-    type: mongoose.Schema.ObjectId,
-    required: true,
+    type: mongoose.Schema.ObjectId
   },
   name: {
     type: String,

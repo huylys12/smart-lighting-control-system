@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import FamilyRestroomOutlinedIcon from "react-native-vector-icons/MaterialIcons";
 import GroupsOutlineIcon from "react-native-vector-icons/MaterialIcons";
+import RoomContainer from "../../components/RoomContainer";
 
 export default function HomeHomeScreen({ navigation, route }) {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -51,188 +52,12 @@ export default function HomeHomeScreen({ navigation, route }) {
       </View>
       <ScrollView>
         <View style={styles.roomList.roomGrid}>
-          <TouchableOpacity onPress={handleTapRoomItem}>
-            <View style={styles.roomItem.container}>
-              <View style={styles.roomItem.top}>
-                <GroupsOutlineIcon
-                  name="groups"
-                  type="outline"
-                  size={24}
-                  color="#0E0E17"
-                />
-                <Switch
-                  trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
-                  thumbColor={"#fff"}
-                  onValueChange={toggleSwitch}
-                  value={isEnabled}
-                />
-              </View>
-              <Text style={styles.roomItem.title}>Living Room</Text>
-              <Text style={styles.roomItem.subtitle}>3 Lights</Text>
-            </View>
-          </TouchableOpacity>
-          <View style={styles.roomItem.container}>
-            <View style={styles.roomItem.top}>
-              <GroupsOutlineIcon
-                name="groups"
-                type="outline"
-                size={24}
-                color="#0E0E17"
-              />
-              <Switch
-                trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
-                thumbColor={"#fff"}
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-              />
-            </View>
-            <Text style={styles.roomItem.title}>Living Room</Text>
-            <Text style={styles.roomItem.subtitle}>3 Lights</Text>
-          </View>
-          <View style={styles.roomItem.container}>
-            <View style={styles.roomItem.top}>
-              <GroupsOutlineIcon
-                name="groups"
-                type="outline"
-                size={24}
-                color="#0E0E17"
-              />
-              <Switch
-                trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
-                thumbColor={"#fff"}
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-              />
-            </View>
-            <Text style={styles.roomItem.title}>Living Room</Text>
-            <Text style={styles.roomItem.subtitle}>3 Lights</Text>
-          </View>
-          <View style={styles.roomItem.container}>
-            <View style={styles.roomItem.top}>
-              <GroupsOutlineIcon
-                name="groups"
-                type="outline"
-                size={24}
-                color="#0E0E17"
-              />
-              <Switch
-                trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
-                thumbColor={"#fff"}
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-              />
-            </View>
-            <Text style={styles.roomItem.title}>Living Room</Text>
-            <Text style={styles.roomItem.subtitle}>3 Lights</Text>
-          </View>
-          <View style={styles.roomItem.container}>
-            <View style={styles.roomItem.top}>
-              <GroupsOutlineIcon
-                name="groups"
-                type="outline"
-                size={24}
-                color="#0E0E17"
-              />
-              <Switch
-                trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
-                thumbColor={"#fff"}
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-              />
-            </View>
-            <Text style={styles.roomItem.title}>Living Room</Text>
-            <Text style={styles.roomItem.subtitle}>3 Lights</Text>
-          </View>
-          <View style={styles.roomItem.container}>
-            <View style={styles.roomItem.top}>
-              <GroupsOutlineIcon
-                name="groups"
-                type="outline"
-                size={24}
-                color="#0E0E17"
-              />
-              <Switch
-                trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
-                thumbColor={"#fff"}
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-              />
-            </View>
-            <Text style={styles.roomItem.title}>Living Room</Text>
-            <Text style={styles.roomItem.subtitle}>3 Lights</Text>
-          </View>
-          <View style={styles.roomItem.container}>
-            <View style={styles.roomItem.top}>
-              <GroupsOutlineIcon
-                name="groups"
-                type="outline"
-                size={24}
-                color="#0E0E17"
-              />
-              <Switch
-                trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
-                thumbColor={"#fff"}
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-              />
-            </View>
-            <Text style={styles.roomItem.title}>Living Room</Text>
-            <Text style={styles.roomItem.subtitle}>3 Lights</Text>
-          </View>
-          <View style={styles.roomItem.container}>
-            <View style={styles.roomItem.top}>
-              <GroupsOutlineIcon
-                name="groups"
-                type="outline"
-                size={24}
-                color="#0E0E17"
-              />
-              <Switch
-                trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
-                thumbColor={"#fff"}
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-              />
-            </View>
-            <Text style={styles.roomItem.title}>Living Room</Text>
-            <Text style={styles.roomItem.subtitle}>3 Lights</Text>
-          </View>
-          <View style={styles.roomItem.container}>
-            <View style={styles.roomItem.top}>
-              <GroupsOutlineIcon
-                name="groups"
-                type="outline"
-                size={24}
-                color="#0E0E17"
-              />
-              <Switch
-                trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
-                thumbColor={"#fff"}
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-              />
-            </View>
-            <Text style={styles.roomItem.title}>Living Room</Text>
-            <Text style={styles.roomItem.subtitle}>3 Lights</Text>
-          </View>
-          <View style={styles.roomItem.container}>
-            <View style={styles.roomItem.top}>
-              <GroupsOutlineIcon
-                name="groups"
-                type="outline"
-                size={24}
-                color="#0E0E17"
-              />
-              <Switch
-                trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
-                thumbColor={"#fff"}
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-              />
-            </View>
-            <Text style={styles.roomItem.title}>Living Room</Text>
-            <Text style={styles.roomItem.subtitle}>3 Lights</Text>
-          </View>
+          <RoomContainer isEnabledProp={true} navigation={navigation} numLight={10} roomName={"Living Room"} key={1} />
+          <RoomContainer isEnabledProp={false} navigation={navigation} numLight={3} roomName={"Dining Room"} key={2} />
+          <RoomContainer isEnabledProp={true} navigation={navigation} numLight={4} roomName={"Bed Room 1"} key={3} />
+          <RoomContainer isEnabledProp={false} navigation={navigation} numLight={5} roomName={"Bath Room"} key={4} />
+          <RoomContainer isEnabledProp={true} navigation={navigation} numLight={6} roomName={"Kitchen"} key={5} />
+          <RoomContainer isEnabledProp={false} navigation={navigation} numLight={7} roomName={"Bed Room 2"} key={6} />
         </View>
       </ScrollView>
     </View>
