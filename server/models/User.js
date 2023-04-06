@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
 });
 
 //Remove refreshToken from the response
-User.set("toJSON", {
+userSchema.set("toJSON", {
   transform: function (doc, ret, options) {
     delete ret.refreshToken;
     return ret;
