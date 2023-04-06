@@ -10,7 +10,41 @@ export default function SignUpScreen({navigation}) {
   };
   
   
-    
+  const [isFocusedName, setIsFocusedName] = useState(false);
+  const [isFocusedEmail, setIsFocusedEmail] = useState(false);
+  const [isFocusedPassword, setisFocusedPassword] = useState(false);
+  const [isValidEmail, setIsValidEmail] = useState(true);
+  const [isValidPassword, setIsValidPassword] = useState(true);
+  const [password, setPassword] = useState('');
+  const [showNotification, setShowNotification] = useState(false);
+  
+
+
+  const handleFocusName = () => setIsFocusedName(true);
+  const handleBlurName = () => setIsFocusedName(false);
+
+  const handleFocusEmail = () => setIsFocusedEmail(true);
+  const handleBlurEmail = () => setIsFocusedEmail(false);
+  
+  const handleFocusPassword = () => setisFocusedPassword(true);
+  const handleBlurPassword = () => setisFocusedPassword(false);
+
+  const checkPasswordValidity = (password) => {
+    setIsValidPassword(password.length >= 8);
+    if (password.length >= 8) {
+      setShowNotification(false);
+    } else {
+      setShowNotification(true);
+    }
+  };
+  const checkEmailValidity = (email) => {
+    setIsValidEmail(email.includes('@'));
+    if (email.indexOf('@') === -1) {
+      setIsValidEmail(false);
+    } else {
+      setIsValidEmail(true);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -18,20 +52,71 @@ export default function SignUpScreen({navigation}) {
       <Text style={styles.welcomeText}>Hello! Welcome Back</Text>
       
       <View style={styles.inputBox}>
-        <TextInput placeholder="Enter your name" style={styles.input}/>
+        {isFocusedName && <Text style={styles.title}>Full Name</Text>}
+        <TextInput
+          placeholder="Enter your name"
+          style={styles.input}
+          onFocus={handleFocusName}
+          onBlur={handleBlurName}
+          placeholderTextColor={isFocusedName ? 'transparent' : '#999999'}
+        />
       </View>
-      <View style={styles.inputBox}>
-        <TextInput placeholder="Enter your Email" style={styles.input}/>
+      <View style={[styles.inputBox,!isValidEmail && styles.invalidInput]}>
+    {isFocusedEmail && <Text style={styles.title}>Email Address</Text>}
+    <TextInput
+      placeholder="Enter your email"
+      style={[
+        styles.input
+      ]}
+      onFocus={handleFocusEmail}
+      onBlur={handleBlurEmail}
+      placeholderTextColor={isFocusedEmail ? 'transparent' : '#999999'}
+      onChangeText={checkEmailValidity}
+    />
+     
+  </View>
+  {!isValidEmail && (
+      <View style={styles.notificationBox}>
+        <Text style={styles.notificationText}>
+          Email address must include @ symbol.
+        </Text>
+  
       </View>
+    )}
       <Text style={styles.passwordInfo}>You will use this email address to log in.</Text>
-      <View style={styles.inputBox}>
-        <TextInput placeholder="Enter your Password" secureTextEntry={!showPassword} style={styles.input}/>
+      <View style={[styles.inputBox,!isValidPassword && { borderColor: 'red' }]}>
+      {isFocusedPassword && <Text style={styles.title}>Password</Text>}
+        <TextInput placeholder="Enter your Password" 
+        secureTextEntry={!showPassword} style={styles.input}
+        onFocus={handleFocusPassword}
+          onBlur={handleBlurPassword}
+          placeholderTextColor={isFocusedPassword ? 'transparent' : '#999999'}
+          onChangeText={(text) => {
+            setPassword(text);
+            checkPasswordValidity(text);
+          }}
+        />
         <TouchableOpacity style={styles.showButton} onPress={toggleShowPassword}>
           <Text style={styles.showButtonText}>{showPassword ? 'Hide' : 'Show'}</Text>
         </TouchableOpacity>
       </View>
+      {showNotification && (
+      <View style={styles.notificationBox}>
+        <Text style={styles.notificationText}>
+          Password must be at least 8 characters long.
+        </Text>
+        <TouchableOpacity
+          style={styles.notificationButton}
+          onPress={() => setShowNotification(false)}
+        >
+          
+        </TouchableOpacity>
+      </View>
+    )}
       <Text style={styles.passwordInfo}>Your password must have at least 8 characters</Text>
-      <TouchableOpacity style={styles.signUpButton} onPress={() => navigation.navigate('LogIn')}>
+      <TouchableOpacity style={styles.signUpButton} onPress={() => { if (isValidEmail && isValidPassword) {
+      navigation.navigate('LogIn');
+    }}}>
         <Text style={styles.signUpButtonText}>Sign Up</Text>
       </TouchableOpacity>
       <Text style={styles.agreementText}>
@@ -53,10 +138,31 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     
   },
+ notificationBox: {
+    
+    borderColor: '#FF4D4D',
+    borderRadius: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginTop: 15,
+  },
+  notificationText: {
+    color: '#FF4D4D',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  notificationButton: {
+    display: 'none',
+  },
+  
+
   signUpText: {
     position: 'absolute',
     top: 50,
-    left: 10,
+    left: 16,
     width: 132,
     height: 40,
     fontWeight: '700',
@@ -67,13 +173,27 @@ const styles = StyleSheet.create({
   welcomeText: {
     position: 'absolute',
     top: 100,
-    left: 10,
+    left: 16,
     width: 343,
     height: 39,
     fontWeight: '400',
     fontSize: 17,
     lineHeight: 22,
     color: '#000000',
+  },
+  title: {
+    position: 'absolute',
+    top: 4,
+    left: 8,
+    fontSize: 12,
+    color: '#999999',
+    backgroundColor: '#FFFFFF',
+    paddingHorizontal: 5,
+  },
+  invalidInput: {
+    borderWidth: 1,
+    borderColor: 'red',
+    borderRadius: 5
   },
   inputBox: {
     marginTop: 20,
@@ -102,9 +222,9 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   showButtonText: {
-    fontWeight: 'normal',
-    fontSize: 16,
-    color: '#000000',
+    fontWeight: '300',
+    fontSize: 14,
+    color: '#919191',
   },
   passwordInfo: {
     width: 343,
