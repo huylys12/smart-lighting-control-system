@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
 
   signUpText: {
     position: 'absolute',
-    top: 50,
+    top: 30,
     left: 16,
     width: 132,
     height: 40,
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   },
   welcomeText: {
     position: 'absolute',
-    top: 100,
+    top: 80,
     left: 16,
     width: 343,
     height: 39,
@@ -275,8 +275,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign:'center',
     color: '#919191',
-    marginTop: 20,
-    top:40,
+    
+    top:140,
   },
  
 });

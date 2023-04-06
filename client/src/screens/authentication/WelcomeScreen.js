@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
     
   },
   Welcometext: {
-  paddingLeft: 16,
+  paddingLeft: 5,
+  left:-5,
   width: 293,
   height: 40,
   fontWeight: '700',
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
 },
 text: {
   width: 293,
-  paddingLeft: 16,
+  paddingLeft: 5,
   fontWeight: 'normal',
   fontSize: 17,
   color: '#717171',
@@ -55,7 +56,7 @@ text: {
   marginRight: 60,
 },
 img: {
-  left:16,
+  left:5,
   width: 130.5,
   height: 33.7,
   marginRight: 220,
