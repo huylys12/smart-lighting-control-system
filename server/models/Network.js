@@ -7,16 +7,12 @@ const mongoose = require("mongoose");
 const networkSchema = mongoose.Schema({
   userId: {
     type: mongoose.Schema.ObjectId,
-    required: true,
   },
   name: {
     type: String,
-    unique: true,
-    required: true,
   },
   location: {
     type: String,
-    required: true,
   },
   canAdjustAutomatically: Boolean,
 });

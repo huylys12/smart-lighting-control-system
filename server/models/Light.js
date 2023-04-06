@@ -7,12 +7,9 @@ const mongoose = require("mongoose");
 const lightSchema = mongoose.Schema({
   roomId: {
     type: mongoose.Schema.ObjectId,
-    required: true,
   },
   name: {
     type: String,
-    unique: true,
-    required: true,
   },
   type: String,
   status: Boolean,
