@@ -9,29 +9,97 @@ export default function LogInScreen({navigation}) {
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
-  
-  
-    
+  const [isFocusedEmail, setIsFocusedEmail] = useState(false);
+  const [isFocusedPassword, setisFocusedPassword] = useState(false);
+  const [isValidEmail, setIsValidEmail] = useState(true);
+  const [isValidPassword, setIsValidPassword] = useState(true);
+  const [password, setPassword] = useState('');
+  const [showNotification, setShowNotification] = useState(false);
 
+
+  const handleFocusEmail = () => setIsFocusedEmail(true);
+  const handleBlurEmail = () => setIsFocusedEmail(false);
+  
+  const handleFocusPassword = () => setisFocusedPassword(true);
+  const handleBlurPassword = () => setisFocusedPassword(false);
+  
+  const checkEmailValidity = (email) => {
+    setIsValidEmail(email.includes('@'));
+    if (email.indexOf('@') === -1) {
+      setIsValidEmail(false);
+    } else {
+      setIsValidEmail(true);
+    }
+  };
+  const checkPasswordValidity = (password) => {
+    setIsValidPassword(password.length >= 8);
+    if (password.length >= 8) {
+      setShowNotification(false);
+    } else {
+      setShowNotification(true);
+    }
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.signUpText}>Sign In</Text>
       <Text style={styles.welcomeText}>Hello! Welcome Back</Text>
       
      
-      <View style={styles.inputBox}>
-        <TextInput placeholder="Enter your Email" style={styles.input}/>
+      <View style={[styles.inputBox,!isValidEmail && styles.invalidInput]}>
+    {isFocusedEmail && <Text style={styles.title}>Email Address</Text>}
+    <TextInput
+      placeholder="Enter your email"
+      style={[
+        styles.input
+      ]}
+      onFocus={handleFocusEmail}
+      onBlur={handleBlurEmail}
+      placeholderTextColor={isFocusedEmail ? 'transparent' : '#999999'}
+      onChangeText={checkEmailValidity}
+    />
+    
+  </View>
+  {!isValidEmail && (
+      <View style={styles.notificationBox}>
+        <Text style={styles.notificationText}>
+          Email address must include @ symbol.
+        </Text>
+  
       </View>
-      
-      <View style={styles.inputBox}>
-        <TextInput placeholder="Enter your Password" secureTextEntry={!showPassword} style={styles.input}/>
+    )}
+      <View style={[styles.inputBox,!isValidPassword && { borderColor: 'red' }]}>
+      {isFocusedPassword && <Text style={styles.title}>Password</Text>}
+        <TextInput placeholder="Enter your Password" 
+        secureTextEntry={!showPassword} style={styles.input}
+        onFocus={handleFocusPassword}
+          onBlur={handleBlurPassword}
+          placeholderTextColor={isFocusedPassword ? 'transparent' : '#999999'}
+          onChangeText={(text) => {
+            setPassword(text);
+            checkPasswordValidity(text);
+          }}
+        />
         <TouchableOpacity style={styles.showButton} onPress={toggleShowPassword}>
           <Text style={styles.showButtonText}>{showPassword ? 'Hide' : 'Show'}</Text>
         </TouchableOpacity>
       </View>
-      
-      <TouchableOpacity style={styles.signUpButton} >
-        <Text style={styles.signUpButtonText} >Log In</Text>
+      {showNotification && (
+      <View style={styles.notificationBox}>
+        <Text style={styles.notificationText}>
+          Password must be at least 8 characters long.
+        </Text>
+        <TouchableOpacity
+          style={styles.notificationButton}
+          onPress={() => setShowNotification(false)}
+        >
+          
+        </TouchableOpacity>
+      </View>
+    )}
+      <TouchableOpacity style={styles.signUpButton} onPress={() => { if (isValidEmail && isValidPassword) {
+      navigation.navigate('SignUp');
+    }}}>
+        <Text style={styles.signUpButtonText}>Log In</Text>
       </TouchableOpacity>
       <View style={styles.rememberMeContainer}>
       <CheckBox
@@ -74,10 +142,30 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     
   },
+  notificationBox: {
+    
+    borderColor: '#FF4D4D',
+    borderRadius: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginTop: 15,
+  },
+  notificationText: {
+    color: '#FF4D4D',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  notificationButton: {
+    display: 'none',
+  },
+  
   signUpText: {
     position: 'absolute',
     top: 50,
-    left: 10,
+    left: 16,
     width: 132,
     height: 40,
     fontWeight: '700',
@@ -88,13 +176,28 @@ const styles = StyleSheet.create({
   welcomeText: {
     position: 'absolute',
     top: 100,
-    left: 10,
+    left: 16,
     width: 343,
     height: 39,
     fontWeight: '400',
     fontSize: 17,
     lineHeight: 22,
     color: '#000000',
+    
+  },
+  title: {
+    position: 'absolute',
+    top: 4,
+    left: 8,
+    fontSize: 12,
+    color: '#999999',
+    backgroundColor: '#FFFFFF',
+    paddingHorizontal: 5,
+  },
+  invalidInput: {
+    borderWidth: 1,
+    borderColor: 'red',
+    borderRadius: 5
   },
   inputBox: {
     marginTop: 20,
@@ -123,9 +226,9 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   showButtonText: {
-    fontWeight: 'normal',
-    fontSize: 16,
-    color: '#000000',
+    fontWeight: '300',
+    fontSize: 14,
+    color: '#919191',
   },
  
   signUpButton: {
@@ -184,8 +287,9 @@ const styles = StyleSheet.create({
   },
   forgotPasswordText: {
     marginLeft: -140,
-    color: 'blue',
-    fontWeight: '600',
+    marginTop:5,
+    color: '#919191',
+    fontWeight: '400',
     left:180,
   },
   orContainer: {
@@ -221,7 +325,7 @@ orText: {
   marginLeft: 5,
   marginRight: 5,
   top:10,
-  fontWeight:'bold',
+  fontWeight:'normal',
 },
 box: {
   width: 163,
