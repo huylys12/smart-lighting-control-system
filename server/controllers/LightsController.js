@@ -1,31 +1,30 @@
 const Light = require("../models/Light");
 
 module.exports = class LightsController {
-  async getAllLights(req, res) {
-    Light.find()
-      .then((lights) => {
-        res.status(200).json({
-          sucess: true,
-          msg: "Successful in retrieving all the lights.",
-          lights: lights,
-        });
-      })
-      .catch((err) => {
-        res.status(500).json({
-          success: false,
-          msg: "Encountered an error while retrieving all the lights.",
-        });
-      });
-  }
+  // async getAllLights(req, res) {
+  //   Light.find()
+  //     .then((lights) => {
+  //       res.status(200).json({
+  //         sucess: true,
+  //         msg: "Successful in retrieving all the lights.",
+  //         lights: lights,
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       res.status(500).json({
+  //         success: false,
+  //         msg: "Encountered an error while retrieving all the lights.",
+  //       });
+  //     });
+  // }
 
-  async getLightByRoomId(req, res) {
+  async getLightById(req, res) {
     const lightId = req.params.lightId;
-    const roomId = req.params.roomId;
-    Light.find({ id: lightId, roomId: roomId })
+    Light.find({ _id: lightId })
       .then((light) => {
         res.status(200).json({
           sucess: true,
-          msg: "Successful in retrieving light.",
+          msg: "Successful in retrieving light with Id.",
           light: light,
         });
       })
@@ -56,16 +55,27 @@ module.exports = class LightsController {
   }
 
   async createLight(req, res) {
-    const { roomId, name, type, status, brightness, canAdjustAutomatically } =
-      req.body;
+    const {
+      name,
+      type,
+      status,
+      brightness,
+      canAdjustAutomatically,
+      brightnessFeedKey,
+      colorFeedKey,
+      statusFeedKey,
+    } = req.body;
 
     const newLight = new Light({
-      roomId: roomId,
+      roomId: req.params.roomId,
       name: name,
       type: type,
       status: status,
       brightness: brightness,
       canAdjustAutomatically: canAdjustAutomatically,
+      brightnessFeedKey: brightnessFeedKey,
+      colorFeedKey: colorFeedKey,
+      statusFeedKey: statusFeedKey,
     });
     newLight
       .save()
@@ -82,25 +92,28 @@ module.exports = class LightsController {
 
   async updateLight(req, res) {
     const {
-      id,
-      roomId,
       name,
       type,
       status,
       brightness,
       canAdjustAutomatically,
+      brightnessFeedKey,
+      colorFeedKey,
+      statusFeedKey,
     } = req.body;
 
     Light.updateOne(
-      { id: id },
+      { _id: req.params.lightId },
       {
         $set: {
-          roomId: roomId,
           name: name,
           type: type,
           status: status,
           brightness: brightness,
           canAdjustAutomatically: canAdjustAutomatically,
+          brightnessFeedKey: brightnessFeedKey,
+          colorFeedKey: colorFeedKey,
+          statusFeedKey: statusFeedKey,
         },
       }
     )
@@ -117,7 +130,7 @@ module.exports = class LightsController {
 
   async deleteLight(req, res) {
     const lightId = req.params.lightId;
-    Light.deleteOne({ id: lightId })
+    Light.deleteOne({ _id: lightId })
       .then((result) => {
         res.status(200).json({ success: true, msg: "Light deleted" });
       })
@@ -128,4 +141,4 @@ module.exports = class LightsController {
         });
       });
   }
-}
+};

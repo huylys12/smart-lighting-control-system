@@ -11,7 +11,10 @@ const lightSchema = mongoose.Schema({
   name: {
     type: String,
   },
-  type: String,
+  type: {
+    type: String,
+    enum: ['color', 'brightness']
+  },
   status: Boolean,
   brightness: {
     type: Number,
@@ -19,6 +22,9 @@ const lightSchema = mongoose.Schema({
     max: 100
   },
   canAdjustAutomatically: Boolean,
+  brightnessFeedKey: String,
+  colorFeedKey: String,
+  statusFeedKey: String
 });
 
 //////=========================================================================
