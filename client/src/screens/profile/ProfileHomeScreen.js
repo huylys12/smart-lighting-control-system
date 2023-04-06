@@ -8,22 +8,19 @@ import ProfilePowerComponents from "./ProfilePowerComponents";
 export default function ProfileHomeScreen({navigation}) {
   return (
     <View style={style.container}>
-      <View>
+      <View style={{marginHorizontal: 10}}>
         <ProfileNameComponents name={"Harry Brown"}/>
-      </View>
-      <View>
         <ProfilePowerComponents poweruse={"219 kwh"}/>
+        <Text style={{fontSize:22,fontWeight:600,marginTop:16}} >Setting</Text>
+      
+        <Notification text={'Notification'} hour={'Manage the way we send you all the notifications'} name={'notifications'} color={'#384EC7'}/>
+        <Notification text={'Automation'} hour={'Permit the app control your lights'} name={'calendar-outline'} color={'#599BF9'}/>
+        <Notification text={'Profile'} hour={'Edit information in your profile, even your password'} name={'create-outline'} color={'#FFAC3D'}/>
+        <View style={style.logout}>
+          <Text style={{textAlign:'center',color:'rgba(75, 97, 221, 0.5)'}}>Log Out</Text>
+        </View>
+          
       </View>
-     <View >
-      <Text style={style.setting} >Setting</Text>
-
-     </View>
-     <Notification text={'Notification'} hour={'Manage the way we send you all the notifications'} name={'notifications'}/>
-     <Notification text={'Automation'} hour={'Permit the app control your lights'} name={'notifications'}/>
-     <Notification text={'Profile'} hour={'Edit information in your profile, even your password'} name={'notifications'}/>
-     <View style={style.logout}>
-        <Text style={{textAlign:'center',color:'rgba(75, 97, 221, 0.5)'}}>Log Out</Text>
-     </View>
     </View>
   );
 }
@@ -32,20 +29,15 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    
   },
-  setting:{
-   fontStyle:'normal',
-    fontWeight:'bold',
-    color: '#000000',
-    fontSize:22,
-    left:16,
-    height:30,
+  setting:{   
+    fontWeight:'600',
+   
   },
   logout:{
-    
-    marginLeft:16,
-    marginRight:16,
-    marginTop:16,
+    padding:10,
+    marginTop:20,
     borderRadius:8,
     paddingVertical: 14, 
     paddingHorizontal: 10,

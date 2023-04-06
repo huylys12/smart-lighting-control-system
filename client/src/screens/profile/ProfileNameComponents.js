@@ -7,7 +7,7 @@ export default function ProfileNameComponents({name}) {
       <View style={style.container}>
        
        <View style={style.button}>
-          <Avatar.Image size={80} source={{
+          <Avatar.Image size={60} source={{
                       uri: `https://th.bing.com/th/id/OIP.vYRdU2539HCTs0f_KOLw7AHaKf?pid=ImgDet&rs=1`,
                   }}
           />
@@ -25,8 +25,6 @@ export default function ProfileNameComponents({name}) {
     button: {
       
       flexDirection:'row',
-      marginLeft:16,
-      marginRight:16,
       marginTop:16,
       borderRadius:8,
       paddingVertical: 14, 
