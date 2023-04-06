@@ -3,7 +3,6 @@ const NetworksController = require("../controllers/NetworksController");
 const UsersController = require("../controllers/UsersController");
 const {
   verifyUserWithJwt,
-  verifyUserWithLocal
 } = require("../utils/authenticate");
 
 module.exports = class NetworksRouter {

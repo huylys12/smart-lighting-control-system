@@ -5,13 +5,19 @@ const mongoose = require("mongoose");
 //////=========================================================================
 // DEFINE MODEL/SCHEMA
 const roomSchema = mongoose.Schema({
-  networkId: {
+  // networkId: {
+  //   type: mongoose.Schema.ObjectId,
+  // },
+  userId: {
     type: mongoose.Schema.ObjectId,
   },
   name: {
     type: String,
   },
-  type: String,
+  type: {
+    type: String,
+    enum: ['living', 'kitchen', 'bedroom', 'bathroom', 'readingroom']
+  },
   status: Boolean,
   brightness:  {
     type: Number,
@@ -19,6 +25,8 @@ const roomSchema = mongoose.Schema({
     max: 100
   },
   canAdjustAutomatically: Boolean,
+  brightnessFeedKey: String, 
+  motionFeedKey: String, 
 });
 
 //////=========================================================================
