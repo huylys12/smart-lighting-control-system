@@ -30,7 +30,7 @@ export default function HomeHomeScreen({ navigation, route }) {
   const [roomList,setRoomList] = useState([]);
   useEffect(() => {
     const fetchData = async() =>{
-      const res = await api.get({url:"http://192.168.31.26:3000/api/rooms/all",token:token});
+      const res = await api.get({url:"api/rooms/all",token:token});
       console.log(res.rooms);
       setRoomList(res.rooms);
     }

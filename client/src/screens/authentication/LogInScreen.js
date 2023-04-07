@@ -18,7 +18,7 @@ export default function LogInScreen({navigation}) {
     setShowPassword(!showPassword);
   };
   const handleLogin = async() => {
-    const res = await api.post({url:"http://192.168.31.26:3000/api/accounts/login",
+    const res = await api.post({url:"api/accounts/login",
               data:`username=${username}&password=${password}`});
     if(res){
       // console.log(res);

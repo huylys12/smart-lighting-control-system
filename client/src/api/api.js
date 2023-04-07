@@ -1,6 +1,6 @@
 export async function get({url,token}){
     try{
-        const res = await fetch(url,{
+        const res = await fetch(`http://192.168.31.26:3000/${url}`,{
             method: 'GET',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -16,7 +16,7 @@ export async function get({url,token}){
 }
 export async function post({url,data,token}){
     try{
-        const res = await fetch(url,{
+        const res = await fetch(`http://192.168.31.26:3000/${url}`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',

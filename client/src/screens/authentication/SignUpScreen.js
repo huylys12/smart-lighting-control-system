@@ -15,7 +15,7 @@ export default function SignUpScreen({navigation}) {
   };
   const { updateToken } = useContext(AuthContext)
   const handleSignUp = async() => {
-    res = await api.post({url:"http://192.168.31.26:3000/api/accounts/register",
+    res = await api.post({url:"api/accounts/register",
                                 data: `username=${username}&name=${name}&password=${password}`});
                                 
     // console.log(res);
