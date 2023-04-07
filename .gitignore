@@ -1,7 +1,7 @@
 server/package-lock.json
 server/node_modules
 server/.env
-client/.env
+client/secret.js
 client/node_modules/
 client/.expo/
 client/package-lock.json
