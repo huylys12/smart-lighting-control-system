@@ -1,4 +1,5 @@
 const Light = require("../models/Light");
+const Room = require("../models/Room");
 
 module.exports = class LightsController {
   // async getAllLights(req, res) {
@@ -80,6 +81,15 @@ module.exports = class LightsController {
     newLight
       .save()
       .then((result) => {
+        Room.findOne({_id: req.params.roomId}).then(room => {
+          room.numOfLights++;
+          room.save();
+        }).catch(err => {
+          res.status(500).json({
+            success: false,
+            msg: "Encountered an error while update number of lights for room. Please, try again.",
+          });
+        })
         res.status(200).json({ success: true, msg: "Light added" });
       })
       .catch((err) => {
@@ -132,6 +142,15 @@ module.exports = class LightsController {
     const lightId = req.params.lightId;
     Light.deleteOne({ _id: lightId })
       .then((result) => {
+        Room.findOne({_id: req.params.roomId}).then(room => {
+          room.numOfLights--;
+          room.save();
+        }).catch(err => {
+          res.status(500).json({
+            success: false,
+            msg: "Encountered an error while update number of lights for room. Please, try again.",
+          });
+        })
         res.status(200).json({ success: true, msg: "Light deleted" });
       })
       .catch((err) => {
