@@ -8,40 +8,46 @@ import ProfilePower from "../../components/ProfilePower";
 export default function ProfileHomeScreen({ navigation }) {
   return (
     <View style={style.container}>
-      <View style={{ marginHorizontal: 16 }}>
+      <View>
         <ProfileName name={"Harry Brown"} />
         <ProfilePower poweruse={"219 kwh"} />
+      </View>
         <Text style={{ fontSize: 22, fontWeight: 600, marginTop: 16 }}>
           Setting
         </Text>
-        <ScrollView>
-          <NotificationContainer
-            text={"Notification"}
-            hour={"Manage the way we send you all the notifications"}
-            name={"notifications"}
-            color={"#384EC7"}
-          />
-          <NotificationContainer
-            text={"Automation"}
-            hour={"Permit the app control your lights"}
-            name={"calendar-outline"}
-            color={"#599BF9"}
-          />
-          <NotificationContainer
-            text={"Profile"}
-            hour={"Edit information in your profile, even your password"}
-            name={"create-outline"}
-            color={"#FFAC3D"}
-          />
-          <View style={style.logout}>
-            <Text
-              style={{ textAlign: "center", color: "rgba(75, 97, 221, 0.5)" }}
-            >
-              Log Out
-            </Text>
-          </View>
-        </ScrollView>
-      </View>
+      <ScrollView>
+        <NotificationContainer
+          text={"Notification"}
+          hour={"Manage the way we send you all the notifications"}
+          name={"notifications"}
+          color={"#384EC7"}
+        />
+        <NotificationContainer
+          text={"Automation"}
+          hour={"Permit the app control your lights"}
+          name={"calendar-outline"}
+          color={"#599BF9"}
+        />
+        <NotificationContainer
+          text={"Profile"}
+          hour={"Edit information in your profile, even your password"}
+          name={"create-outline"}
+          color={"#FFAC3D"}
+        />
+        <NotificationContainer
+          text={"Profile"}
+          hour={"Edit information in your profile, even your password"}
+          name={"create-outline"}
+          color={"#FFAC3D"}
+        />
+        <View style={style.logout}>
+          <Text
+            style={{ textAlign: "center", color: "rgba(75, 97, 221, 0.5)" }}
+          >
+            Log Out
+          </Text>
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -50,6 +56,9 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    paddingHorizontal: 16,
+    paddingBottom: 16,
+    paddingTop: 8,
   },
   setting: {
     fontWeight: "600",
