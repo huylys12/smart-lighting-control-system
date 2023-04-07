@@ -51,7 +51,7 @@ module.exports = class UsersController {
           res.statusCode = 500;
           res.send(err);
         } else {
-          user.email = req.body.email || "";
+          user.name = req.body.name || "";
           const token = getToken({ __id: user._id });
           const refreshToken = getRefreshToken({ __id: user._id });
           user.refreshToken.push({ refreshToken });

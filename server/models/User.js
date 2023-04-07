@@ -13,7 +13,7 @@ const Session = new mongoose.Schema({
 });
 
 const userSchema = new mongoose.Schema({
-  email: {
+  name: {
     type: String,
   },
   authStrategy: {

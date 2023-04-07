@@ -20,7 +20,7 @@ module.exports = class UsersRouter {
     this.router.get("/logout", verifyUserWithJwt, this.usersController.logout);
 
     this.router.get("/me", verifyUserWithJwt, (req, res) => {
-      res.send(req.user)
+      res.send(req.user);
     })
   }
 };

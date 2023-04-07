@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const roomSchema = mongoose.Schema({
   // networkId: {
   //   type: mongoose.Schema.ObjectId,
+  //   required: true,
   // },
   userId: {
     type: mongoose.Schema.ObjectId,
@@ -22,7 +23,13 @@ const roomSchema = mongoose.Schema({
   brightness:  {
     type: Number,
     min: 0,
-    max: 100
+    max: 100,
+  },
+  numOfLights:{
+    type: Number,
+    min: 0,
+    max: 5,
+    default: 0
   },
   canAdjustAutomatically: Boolean,
   brightnessFeedKey: String, 

@@ -56,8 +56,6 @@ export default function HomeAddRoomScreen({ navigation}) {
                     height: 60
                 }}
             />
-        
-       
             <FloatingLabelInput
                 label="Brightness Feed Key"
                 value={brightnessFK}
@@ -74,8 +72,6 @@ export default function HomeAddRoomScreen({ navigation}) {
                     height: 60
                 }}
             />
-        
-        
             <FloatingLabelInput
                 label="Color Feed Key"
                 value={colorFK}

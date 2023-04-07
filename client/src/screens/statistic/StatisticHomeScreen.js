@@ -38,10 +38,11 @@ export default function StatisticHomeScreen({navigation }) {
     <ScrollView style={{backgroundColor:"white"}}>
       <View style={{marginHorizontal: 10}}>
         <View style={styles.header}>
-            <Text style={{fontWeight:900}}>Energy Saving</Text>
+            <Text style={{fontWeight:900,fontSize:16}}>Energy Saving</Text>
             <Picker 
               selectedValue={selected}
-              style={{ height: 50, width: 150,borderWidth: 1, borderColor: 'black'}}
+              style={{ height: 50, width: 150,borderWidth: 1, borderColor: '#000000'}}
+              mode='dropdown'
               onValueChange={(itemValue, itemIndex) => setSelected(itemValue)}
             >
               <Picker.Item label='Week' value="Week" />
@@ -51,7 +52,7 @@ export default function StatisticHomeScreen({navigation }) {
         <View style={styles.chart}>
           <Statistic data={selected == "Week" ? data.week:data.month} type={selected} />
         </View>
-        <Text style={{fontWeight:900,marginVertical:8}}>Expense from Device</Text>
+        <Text style={{fontWeight:900,marginVertical:8,fontSize:16}}>Expense from Device</Text>
         <DeviceInforCard name={"Living Room"} percent={20} device={"bulb-outline"} />
         <DeviceInforCard name={"Dining Room"} percent={30} device={"bulb-outline"} />
         <DeviceInforCard name={"Bed Room"} percent={50} device={"bulb-outline"} />

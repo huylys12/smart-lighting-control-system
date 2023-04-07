@@ -11,6 +11,9 @@ import React, { useState } from "react";
 import GroupsOutlineIcon from "react-native-vector-icons/MaterialIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import LightContainer from "../../components/LightContainer";
+import RoomInfo from "../../components/RoomInfo";
+
 
 export default function HomeRoomScreen({ navigation, route }) {
   const { name } = route.params;
@@ -18,39 +21,28 @@ export default function HomeRoomScreen({ navigation, route }) {
     navigation.setOptions({ headerTitle: name });
   }, [navigation, name]);
 
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => {
-    setIsEnabled((previousState) => !previousState);
-  };
+  // const [isEnabled, setIsEnabled] = useState(false);
+  // const toggleSwitch = () => {
+  //   setIsEnabled((previousState) => !previousState);
+  // };
 
-  const handleTapLight = () => {
-    return navigation.navigate("HomeLight", {name: "Pendant Lamp"})
-  };
+  // const handleTapLight = () => {
+  //   return navigation.navigate("HomeLight", {name: "Pendant Lamp"})
+  // };
+
   const handleTapAddLight = () => {
     return navigation.navigate("HomeAddLight");
   };
   return (
     <View style={styles.container}>
       <View style={styles.infoGrid}>
-        <View style={styles.infoItem.container}>
-          <View style={styles.infoItem.top}>
-            <GroupsOutlineIcon
-              name="groups"
-              type="outline"
-              size={24}
-              color="#0E0E17"
-            />
-          </View>
-          <Text style={styles.infoItem.subtitle}>People In Here</Text>
-          <Text style={styles.infoItem.title}>No one</Text>
-        </View>
-        <View style={styles.infoItem.container}>
-          <View style={styles.infoItem.top}>
-            <Ionicons name="sunny-outline" color="#0E0E17" size={24} />
-          </View>
-          <Text style={styles.infoItem.subtitle}>Brightness</Text>
-          <Text style={styles.infoItem.title}>60%</Text>
-        </View>
+        <RoomInfo header={<GroupsOutlineIcon
+                                  name="groups"
+                                  type="outline"
+                                  size={24}
+                                  color="#0E0E17"
+                                />} subtitle={"People In Here"} title={"No one"} key={1} />
+        <RoomInfo header={<Ionicons name="sunny-outline" color="#0E0E17" size={24} />} subtitle={"Brightness"} title={"60%"} key={2} />
       </View>
       <View style={styles.sizeBox}></View>
       <View style={styles.lightList.lightHeader.container}>
@@ -63,39 +55,12 @@ export default function HomeRoomScreen({ navigation, route }) {
       </View>
       <View style={styles.sizeBox}></View>
       <ScrollView>
-        <TouchableOpacity onPress={handleTapLight}>
-          <View style={styles.lightItem.container}>
-            <View style={styles.lightItem.content}>
-              <Text style={styles.infoItem.title}>Pendant Lamp</Text>
-              <Text style={styles.infoItem.subtitle}>{isEnabled ? "On" : "Off"}</Text>
-            </View>
-            <Switch
-              trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
-              thumbColor={"#fff"}
-              onValueChange={toggleSwitch}
-              value={isEnabled}
-            />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleTapLight}>
-          <View style={styles.lightItem.container}>
-            <View style={styles.lightItem.content}>
-              <Text style={styles.infoItem.title}>Recessed fixtures</Text>
-              <Text style={styles.infoItem.subtitle}>Off</Text>
-            </View>
-            <Switch
-              trackColor={{ false: "#E1E1E1", true: "#384EC7" }}
-              thumbColor={"#fff"}
-              onValueChange={toggleSwitch}
-              value={isEnabled}
-            />
-          </View>
-        </TouchableOpacity>
+        <LightContainer isEnabledProp={false} lightName={"Pendant Lamp"} navigation={navigation} key={1} />
+        <LightContainer isEnabledProp={false} lightName={"Recessed fixtures"} navigation={navigation} key={2} />
       </ScrollView>
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

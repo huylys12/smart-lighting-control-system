@@ -86,33 +86,38 @@ export default function ScheduleHomeScreen({navigation}) {
             />
             <View style={{display:"flex",flexDirection:"row", width:Dimensions.get('screen').width*0.95, alignItems:"center",borderTopWidth: 0.5,paddingVertical:8}}>
               <Ionicons name="calendar-outline" size={20} style={{marginRight:16,color:"#384EC7"}} />
-              <Text style={{color:"#384EC7"}}>Set date</Text>
+              <Text style={{color:"#384EC7",fontSize:16}}>Set date</Text>
             </View>
             <View style={{display:"flex",flexDirection:"row",width:Dimensions.get('screen').width*0.95, alignItems:"center",borderTopWidth: 0.5,paddingVertical:8}}>
               <Ionicons name="time-outline" size={20} style={{marginRight:16,color:"#384EC7"}}/>
-              <Text style={{color:"#384EC7"}}>Set time</Text>
+              <Text style={{color:"#384EC7",fontSize:16}}>Set time</Text>
             </View>
             <View style={{display:"flex",flexDirection:"row",width:Dimensions.get('screen').width*0.95, alignItems:"center",justifyContent: "space-between",borderTopWidth: 0.5,paddingVertical:8}}>
-              <Text style={{color:"#384EC7"}}>Select Room</Text>
-              {/* <View style={{borderWidth: 0.3,borderRadius: 25}}> */}
+              <View style={{display:"flex", flexDirection:"row",alignItems:"center"}}>
+                <Ionicons name="home-outline" size={20} style={{marginRight:16,color:"#384EC7"}}></Ionicons>
+                <Text style={{color:"#384EC7",fontSize:16}}>Select Room</Text>
+              </View>
                 <Picker
                   style={{ width: 150,height:50,color:"#384EC7"}}
+                  mode='dropdown'
                 >
                   <Picker.Item label='Living Room' value="Living Room" />
                   <Picker.Item label='Bed Room' value="Bed Room" />
                 </Picker>
-              {/* </View> */}
             </View>
             <View style={{display:"flex",flexDirection:"row",width:Dimensions.get('screen').width*0.95, alignItems:"center",justifyContent: "space-between",borderTopWidth: 0.5,paddingVertical:8,borderBottomWidth: 0.5}}>
-              <Text style={{color:"#384EC7"}}>Select Lamp</Text>
-              {/* <View style={{borderWidth: 0.3,borderRadius: 25}}> */}
+              
+              <View style={{display:"flex", flexDirection:"row",alignItems:"center"}}>
+                <Ionicons name="bulb-outline" size={20} style={{marginRight:16,color:"#384EC7"}}></Ionicons>
+                <Text style={{color:"#384EC7",fontSize:16}}>Select Lamp</Text>
+              </View>
                 <Picker
                   style={{ width: 150,height:50, color:"#384EC7"}}
+                  mode='dropdown'
                 >
                   <Picker.Item label='Lamp 1' value="Lamp 1" />
                   <Picker.Item label='Lamp 2' value="Lamp 2" />
                 </Picker>
-              {/* </View> */}
             </View>
             <TouchableOpacity
             style={{backgroundColor: "#4B61DD",width: Dimensions.get('screen').width*0.9,marginTop:10,borderRadius:25,marginBottom: 16}}

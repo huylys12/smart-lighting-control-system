@@ -9,7 +9,7 @@ const HistoryStack = createNativeStackNavigator();
 export default function AuthenticationStack() {
   return (
     <HistoryStack.Navigator screenOptions={{ headerShown: false }}>
-       <HistoryStack.Screen name="Welcome" component={WelcomeScreen} />
+      <HistoryStack.Screen name="Welcome" component={WelcomeScreen} />
       <HistoryStack.Screen name="SignUp" component={SignUpScreen} />
       <HistoryStack.Screen name="LogIn" component={LogInScreen} />
       <HistoryStack.Screen name="Main" component={Navigation} />

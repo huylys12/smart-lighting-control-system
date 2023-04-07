@@ -1,37 +1,51 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import * as api from '../../api/api.js';
+
+import { AuthContext } from '../../context/AuthContext.js';
 
 export default function SignUpScreen({navigation}) {
   const [showPassword, setShowPassword] = useState(false);
-
+  const [username,setUsername] = useState('');
+  const [name,setName] = useState('');
+  const [password,setPassword] = useState('');
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+  const { updateToken } = useContext(AuthContext)
+  const handleSignUp = async() => {
+    res = await api.post({url:"api/accounts/register",
+                                data: `username=${username}&name=${name}&password=${password}`});
+                                
+    // console.log(res);
+    updateToken(res.token);
+    navigation.navigate('LogIn');
+  }
   
   
-    
-
   return (
     <View style={styles.container}>
       <Text style={styles.signUpText}>Sign Up</Text>
       <Text style={styles.welcomeText}>Hello! Welcome Back</Text>
+      <Text style={styles.welcomeText}>{process.env.API_BACKEND_BASE_URL}</Text>
+      
       
       <View style={styles.inputBox}>
-        <TextInput placeholder="Enter your name" style={styles.input}/>
+        <TextInput placeholder="Enter your name" style={styles.input} onChangeText={(value) => setName(value)} />
       </View>
       <View style={styles.inputBox}>
-        <TextInput placeholder="Enter your Email" style={styles.input}/>
+        <TextInput placeholder="Enter your Username" style={styles.input} onChangeText={(value) => setUsername(value)} />
       </View>
       <Text style={styles.passwordInfo}>You will use this email address to log in.</Text>
       <View style={styles.inputBox}>
-        <TextInput placeholder="Enter your Password" secureTextEntry={!showPassword} style={styles.input}/>
+        <TextInput placeholder="Enter your Password" secureTextEntry={!showPassword} style={styles.input} onChangeText={(value) => setPassword(value)} />
         <TouchableOpacity style={styles.showButton} onPress={toggleShowPassword}>
           <Text style={styles.showButtonText}>{showPassword ? 'Hide' : 'Show'}</Text>
         </TouchableOpacity>
       </View>
       <Text style={styles.passwordInfo}>Your password must have at least 8 characters</Text>
-      <TouchableOpacity style={styles.signUpButton} onPress={() => navigation.navigate('LogIn')}>
+      <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
         <Text style={styles.signUpButtonText}>Sign Up</Text>
       </TouchableOpacity>
       <Text style={styles.agreementText}>
