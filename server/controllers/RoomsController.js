@@ -1,27 +1,80 @@
 const Room = require("../models/Room");
 
 module.exports = class RoomsController {
-  async getAllRooms(req, res) {
-    Room.find()
+  // async getAllRooms(req, res) {
+  //   Room.find()
+  //     .then((rooms) => {
+  //       res.status(200).json({
+  //         sucess: true,
+  //         msg: "Successful in retrieving all the rooms.",
+  //         rooms: rooms,
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       res.status(500).json({
+  //         success: false,
+  //         msg: "Encountered an error while retrieving all the rooms.",
+  //       });
+  //     });
+  // }
+
+  // async getRoomByNetworkId(req, res) {
+  //   const networkId = req.params.networkId;
+  //   const roomId = req.params.roomId;
+  //   Room.find({ id: roomId, networkId: networkId })
+  //     .then((room) => {
+  //       res.status(200).json({
+  //         sucess: true,
+  //         msg: "Successful in retrieving the room.",
+  //         room: room,
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       res.status(500).json({
+  //         success: false,
+  //         msg: "Encountered an error while retrieving the room.",
+  //       });
+  //     });
+  // }
+
+  // async getAllRoomsByNetworkId(req, res) {
+  //   const networkId = req.params.networkId;
+  //   Room.find({ networkId: networkId })
+  //     .then((rooms) => {
+  //       res.status(200).json({
+  //         sucess: true,
+  //         msg: "Successful in retrieving all the rooms with networkId.",
+  //         rooms: rooms,
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       res.status(500).json({
+  //         success: false,
+  //         msg: "Encountered an error while retrieving all the rooms with networkId.",
+  //       });
+  //     });
+  // }
+
+  async getAllRoomsByUserId(req, res) {
+    Room.find({ userId: req.user._id })
       .then((rooms) => {
         res.status(200).json({
           sucess: true,
-          msg: "Successful in retrieving all the rooms.",
+          msg: "Successful in retrieving all the rooms with userId.",
           rooms: rooms,
         });
       })
-      .catch((err) => {
+      .catch((error) => {
         res.status(500).json({
           success: false,
-          msg: "Encountered an error while retrieving all the rooms.",
+          msg: "Encountered an error while retrieving all the rooms with userId.",
         });
       });
   }
 
-  async getRoomByNetworkId(req, res) {
-    const networkId = req.params.networkId;
+  async getRoomByUserId(req, res) {
     const roomId = req.params.roomId;
-    Room.find({ id: roomId, networkId: networkId })
+    Room.find({ id: roomId, userId: req.user._id })
       .then((room) => {
         res.status(200).json({
           sucess: true,
@@ -37,35 +90,28 @@ module.exports = class RoomsController {
       });
   }
 
-  async getAllRoomsByNetworkId(req, res) {
-    const networkId = req.params.networkId;
-    Room.find({ networkId: networkId })
-      .then((rooms) => {
-        res.status(200).json({
-          sucess: true,
-          msg: "Successful in retrieving all the rooms with networkId.",
-          rooms: rooms,
-        });
-      })
-      .catch((error) => {
-        res.status(500).json({
-          success: false,
-          msg: "Encountered an error while retrieving all the rooms with networkId.",
-        });
-      });
-  }
-
   async createRoom(req, res) {
-    const { networkId, name, type, status, brightness, canAdjustAutomatically } =
-      req.body;
+    const {
+      name,
+      type,
+      status,
+      brightness,
+      numOfLights,
+      canAdjustAutomatically,
+      brightnessFeedKey,
+      motionFeedKey,
+    } = req.body;
 
     const newRoom = new Room({
-      networkId: networkId,
+      userId: req.user._id,
       name: name,
       type: type,
       status: status,
       brightness: brightness,
+      numOfLights: numOfLights,
       canAdjustAutomatically: canAdjustAutomatically,
+      brightnessFeedKey: brightnessFeedKey,
+      motionFeedKey: motionFeedKey,
     });
     newRoom
       .save()
@@ -82,25 +128,28 @@ module.exports = class RoomsController {
 
   async updateRoom(req, res) {
     const {
-      id,
-      networkId,
       name,
       type,
       status,
       brightness,
       canAdjustAutomatically,
+      numOfLights,
+      brightnessFeedKey,
+      motionFeedKey,
     } = req.body;
 
     Room.updateOne(
-      { id: id },
+      { _id: req.params.roomId },
       {
         $set: {
-          networkId: networkId,
           name: name,
           type: type,
           status: status,
           brightness: brightness,
+          numOfLights: numOfLights,
           canAdjustAutomatically: canAdjustAutomatically,
+          brightnessFeedKey: brightnessFeedKey,
+          motionFeedKey: motionFeedKey,
         },
       }
     )
@@ -117,7 +166,7 @@ module.exports = class RoomsController {
 
   async deleteRoom(req, res) {
     const roomId = req.params.roomId;
-    Room.deleteOne({ id: roomId })
+    Room.deleteOne({ _id: roomId })
       .then((result) => {
         res.status(200).json({ success: true, msg: "Room deleted" });
       })
@@ -128,4 +177,4 @@ module.exports = class RoomsController {
         });
       });
   }
-}
+};

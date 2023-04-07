@@ -7,24 +7,36 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import FamilyRestroomOutlinedIcon from "react-native-vector-icons/MaterialIcons";
 import GroupsOutlineIcon from "react-native-vector-icons/MaterialIcons";
 import RoomContainer from "../../components/RoomContainer";
+import { AuthContext } from "../../context/AuthContext";
+import * as api from "../../api/api";
 
 export default function HomeHomeScreen({ navigation, route }) {
-  const [isEnabled, setIsEnabled] = useState(false);
+  const {token} = useContext(AuthContext);
+  // const [isEnabled, setIsEnabled] = useState(false);
 
-  const toggleSwitch = () => {
-    setIsEnabled((previousState) => !previousState);
-  };
+  // const toggleSwitch = () => {
+  //   setIsEnabled((previousState) => !previousState);
+  // };
 
-  const handleTapRoomItem = () => {
-    return navigation.navigate('HomeRoom', {
-      name: "Living Room"});
-  };
-  
+  // const handleTapRoomItem = () => {
+  //   return navigation.navigate('HomeRoom', {
+  //     name: "Living Room"});
+  // };
+  const [roomList,setRoomList] = useState([]);
+  useEffect(() => {
+    const fetchData = async() =>{
+      const res = await api.get({url:"http://192.168.31.26:3000/api/rooms/all",token:token});
+      console.log(res.rooms);
+      setRoomList(res.rooms);
+    }
+    fetchData();
+  },[token]);
+
   const handleTapAddRoom = () => {
     return navigation.navigate("HomeAddRoom");
   }
@@ -52,12 +64,17 @@ export default function HomeHomeScreen({ navigation, route }) {
       </View>
       <ScrollView>
         <View style={styles.roomList.roomGrid}>
-          <RoomContainer isEnabledProp={true} navigation={navigation} numLight={10} roomName={"Living Room"} key={1} />
+          {
+            roomList.map((room) => (
+              <RoomContainer isEnabledProp={room.status} navigation={navigation} numLight={room.numOfLights} roomName={room.name} key={room._id} />
+            ))
+          }
+          {/* <RoomContainer isEnabledProp={true} navigation={navigation} numLight={10} roomName={"Living Room"} key={1} />
           <RoomContainer isEnabledProp={false} navigation={navigation} numLight={3} roomName={"Dining Room"} key={2} />
           <RoomContainer isEnabledProp={true} navigation={navigation} numLight={4} roomName={"Bed Room 1"} key={3} />
           <RoomContainer isEnabledProp={false} navigation={navigation} numLight={5} roomName={"Bath Room"} key={4} />
           <RoomContainer isEnabledProp={true} navigation={navigation} numLight={6} roomName={"Kitchen"} key={5} />
-          <RoomContainer isEnabledProp={false} navigation={navigation} numLight={7} roomName={"Bed Room 2"} key={6} />
+          <RoomContainer isEnabledProp={false} navigation={navigation} numLight={7} roomName={"Bed Room 2"} key={6} /> */}
         </View>
       </ScrollView>
     </View>

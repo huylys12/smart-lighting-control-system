@@ -1,27 +1,36 @@
 //////=========================================================================
 // LOAD MONGOOSE
 const mongoose = require("mongoose");
-const passport = require("passport");
-const passportLocal = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
 
 //////=========================================================================
 // DEFINE MODEL/SCHEMA
+const Session = new mongoose.Schema({
+  refreshToken: {
+    type: String,
+    default: "",
+  },
+});
+
 const userSchema = new mongoose.Schema({
-  username: {
+  name: {
     type: String,
-    unique: true,
-    required: true,
   },
-  email: {
+  authStrategy: {
     type: String,
-    unique: true,
-    required: true,
+    default: "local",
   },
-  password: {
-    type: String,
-    required: true,
-  }
+  refreshToken: {
+    type: [Session],
+  },
+});
+
+//Remove refreshToken from the response
+userSchema.set("toJSON", {
+  transform: function (doc, ret, options) {
+    delete ret.refreshToken;
+    return ret;
+  },
 });
 
 // A plugin that allows us to use the passportLocalMongoose 

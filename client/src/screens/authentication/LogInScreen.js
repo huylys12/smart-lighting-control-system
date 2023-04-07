@@ -1,36 +1,51 @@
-import { useState } from 'react';
+import { useState,useContext } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import CheckBox from "../../components/Checkbox";
 import { AntDesign,FontAwesome  } from '@expo/vector-icons';
+import { AuthContext } from '../../context/AuthContext';
+import * as api from '../../api/api'
+
+
+
 export default function LogInScreen({navigation}) {
+  const { updateToken, updateUserId, token } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [music, setMusic] = useState(false);
+  const [username,setUsername] = useState('');
+  const [password,setPassword] = useState('');
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
-  
-  
-    
-
+  const handleLogin = async() => {
+    const res = await api.post({url:"http://192.168.31.26:3000/api/accounts/login",
+              data:`username=${username}&password=${password}`});
+    if(res){
+      // console.log(res);
+      updateToken(res.token);
+      // const user = await api.get({url:"http://192.168.31.26:3000/api/accounts/me",token:token});
+      // const userId = user._id;
+      // console.log(userId);
+      // updateUserId(userId);
+      navigation.navigate("Main")
+    }
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.signUpText}>Sign In</Text>
       <Text style={styles.welcomeText}>Hello! Welcome Back</Text>
-      
-     
       <View style={styles.inputBox}>
-        <TextInput placeholder="Enter your Email" style={styles.input}/>
+        <TextInput placeholder="Enter your Username" style={styles.input} onChangeText={(value) => setUsername(value)} />
       </View>
       
       <View style={styles.inputBox}>
-        <TextInput placeholder="Enter your Password" secureTextEntry={!showPassword} style={styles.input}/>
+        <TextInput placeholder="Enter your Password" secureTextEntry={!showPassword} style={styles.input} onChangeText={(value) => setPassword(value)} />
         <TouchableOpacity style={styles.showButton} onPress={toggleShowPassword}>
           <Text style={styles.showButtonText}>{showPassword ? 'Hide' : 'Show'}</Text>
         </TouchableOpacity>
       </View>
       
-      <TouchableOpacity style={styles.signUpButton} onPress={()=>{navigation.navigate("Main")}} >
+      <TouchableOpacity style={styles.signUpButton} onPress={handleLogin} >
         <Text style={styles.signUpButtonText} >Log In</Text>
       </TouchableOpacity>
       <View style={styles.rememberMeContainer}>
