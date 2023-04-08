@@ -100,7 +100,7 @@ export default function ScheduleHomeScreen({navigation}) {
                 <Picker
                   style={{ width: 150,height:50,color:"#384EC7"}}
                   mode='dropdown'
-                >
+                > 
                   <Picker.Item label='Living Room' value="Living Room" />
                   <Picker.Item label='Bed Room' value="Bed Room" />
                 </Picker>

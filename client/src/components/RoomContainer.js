@@ -13,18 +13,22 @@ import {
   import GroupsOutlineIcon from "react-native-vector-icons/MaterialIcons";
   import React, { useState } from "react";
 
-export default function RoomContainer({navigation,roomName,numLight,isEnabledProp}){
+export default function RoomContainer({navigation,roomName,numLight,isEnabledProp,roomId, brightness,peopleInHere}){
     const [isEnabled, setIsEnabled] = useState(isEnabledProp);
     const toggleSwitch = () => {
         setIsEnabled((previousState) => !previousState);
     };
     const handleTapRoomItem = () => {
         return navigation.navigate('HomeRoom', {
-            name: roomName});
+            name: roomName,roomId:roomId,brightness:brightness,peopleInHere:peopleInHere});
     };
     return (
-        <TouchableOpacity onPress={handleTapRoomItem}>
+        <TouchableOpacity >
             <View style={styles.roomItem.container}>
+              <TouchableOpacity style={{display:"flex",justifyContent:"flex-end",flexDirection:"row"}}>
+                <Text style={{fontSize: 12,fontWeight:700,color:"#384EC7"}}>Delete</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={handleTapRoomItem}>
               <View style={styles.roomItem.top}>
                 <GroupsOutlineIcon
                   name="groups"
@@ -41,6 +45,7 @@ export default function RoomContainer({navigation,roomName,numLight,isEnabledPro
               </View>
               <Text style={styles.roomItem.title}>{roomName}</Text>
               <Text style={styles.roomItem.subtitle}>{`${numLight} Lights`}</Text>
+              </TouchableOpacity>
             </View>
         </TouchableOpacity>
     );

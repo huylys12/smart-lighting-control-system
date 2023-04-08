@@ -28,10 +28,11 @@ export default function HomeHomeScreen({ navigation, route }) {
   //     name: "Living Room"});
   // };
   const [roomList,setRoomList] = useState([]);
+
   useEffect(() => {
     const fetchData = async() =>{
       const res = await api.get({url:"api/rooms/all",token:token});
-      console.log(res.rooms);
+      // console.log(res.rooms);
       setRoomList(res.rooms);
     }
     fetchData();
@@ -66,7 +67,7 @@ export default function HomeHomeScreen({ navigation, route }) {
         <View style={styles.roomList.roomGrid}>
           {
             roomList.map((room) => (
-              <RoomContainer isEnabledProp={room.status} navigation={navigation} numLight={room.numOfLights} roomName={room.name} key={room._id} />
+              <RoomContainer isEnabledProp={room.status} navigation={navigation} numLight={room.numOfLights} roomName={room.name} key={room._id} roomId={room._id} brightness={room.brightness} peopleInHere={room.peopleInHere} />
             ))
           }
           {/* <RoomContainer isEnabledProp={true} navigation={navigation} numLight={10} roomName={"Living Room"} key={1} />

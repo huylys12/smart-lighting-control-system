@@ -25,12 +25,18 @@ const roomSchema = mongoose.Schema({
     min: 0,
     max: 100,
   },
+  peopleInHere:{
+    type:String,
+    enum: ["No one", "Anyone in here"],
+    default: 0
+  },
   numOfLights:{
     type: Number,
     min: 0,
     max: 5,
     default: 0
   },
+  
   canAdjustAutomatically: Boolean,
   brightnessFeedKey: String, 
   motionFeedKey: String, 

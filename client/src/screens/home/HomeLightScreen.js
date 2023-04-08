@@ -10,10 +10,10 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Slider from "@react-native-community/slider";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function HomeLightScreen({ navigation, route }) {
-  const { name } = route.params;
+  const { name,brightness } = route.params;
   React.useLayoutEffect(() => {
     navigation.setOptions({ headerTitle: name });
   }, [navigation, name]);
@@ -21,6 +21,11 @@ export default function HomeLightScreen({ navigation, route }) {
   const [sliderValue, setSliderValue] = useState(0);
 
   const [isEnabled, setIsEnabled] = useState(true);
+
+  // setSliderValue(brightness);
+  useEffect(() => {
+    setSliderValue(brightness);
+  },[]);
 
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
