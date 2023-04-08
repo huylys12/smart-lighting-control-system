@@ -12,10 +12,10 @@ import React, { useState } from "react";
 // import Ionicons from "react-native-vector-icons/Ionicons";
 // import FontAwesome from "react-native-vector-icons/FontAwesome";
 
-export default function LightContainer({navigation,lightName,isEnabledProp}){
+export default function LightContainer({navigation,lightName,isEnabledProp,brightness}){
     const [isEnabled, setIsEnabled] = useState(isEnabledProp);
     const handleTapLight = () => {
-        return navigation.navigate("HomeLight", {name: lightName})
+        return navigation.navigate("HomeLight", {name: lightName,brightness:brightness})
     };
     const toggleSwitch = () => {
         setIsEnabled((previousState) => !previousState);

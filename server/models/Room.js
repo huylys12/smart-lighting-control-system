@@ -36,6 +36,7 @@ const roomSchema = mongoose.Schema({
     max: 5,
     default: 0
   },
+  
   canAdjustAutomatically: Boolean,
   brightnessFeedKey: String, 
   motionFeedKey: String, 
