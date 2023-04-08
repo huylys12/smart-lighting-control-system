@@ -25,10 +25,10 @@ const roomSchema = mongoose.Schema({
     min: 0,
     max: 100,
   },
-  peopleInHere:{
-    type:String,
+  peopleInHere: {
+    type: String,
     enum: ["No one", "Anyone in here"],
-    default: 0
+    default: "No one"
   },
   numOfLights:{
     type: Number,

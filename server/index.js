@@ -12,6 +12,7 @@ require("./strategies/JwtStrategy");
 require("./strategies/LocalStrategy");
 require("./utils/authenticate");
 // Connecting to the database.
+const AdafruitController = require("./controllers/AdafruitController");
 const db = mongoDb.getInstance();
 db.connect();
 
@@ -57,6 +58,9 @@ app.use("/api/accounts", usersRouter.router);
 app.use("/api/networks", networksRouter.router);
 app.use("/api/rooms", roomsRouter.router);
 app.use("/api/lights", lightsRouter.router);
+
+const adafruitController = new AdafruitController();
+// setInterval(() => adafruit.updateLight("Living Room","pendantlampbrightness","pendantlampstatus"),3000);
 
 const port = process.env.PORT;
 app.listen(port, () => {

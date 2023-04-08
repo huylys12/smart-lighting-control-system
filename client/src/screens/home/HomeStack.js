@@ -10,7 +10,7 @@ const HistoryStack = createNativeStackNavigator();
 export default function HomeStack() {
   return (
     <HistoryStack.Navigator screenOptions={{ headerShown: false }}>
-      <HistoryStack.Screen name="HomeHome" component={HomeHomeScreen} />
+      <HistoryStack.Screen name="HomeHome" component={HomeHomeScreen} options={{ headerShown: false }}/>
       <HistoryStack.Screen name="HomeRoom" component={HomeRoomScreen} options={{ headerShown: true }}/>
       <HistoryStack.Screen name="HomeLight" component={HomeLightScreen} options={{ headerShown: true, headerBackTitle: "Back" }}/>
       <HistoryStack.Screen name="HomeAddRoom" component={HomeAddRoomScreen} options={{ headerShown: true, headerBackTitle:"Back" }}/>

@@ -1,6 +1,8 @@
+import { SERVER_URL } from "../../secret";
+
 export async function get({url,token}){
     try{
-        const res = await fetch(`http://192.168.31.26:3000/${url}`,{
+        const res = await fetch(`${SERVER_URL}/${url}`,{
             method: 'GET',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -16,7 +18,7 @@ export async function get({url,token}){
 }
 export async function post({url,data,token}){
     try{
-        const res = await fetch(`http://192.168.31.26:3000/${url}`,{
+        const res = await fetch(`${SERVER_URL}/${url}`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
