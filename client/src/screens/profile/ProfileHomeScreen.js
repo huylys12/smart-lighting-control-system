@@ -1,11 +1,16 @@
-import { StyleSheet, Text, View,Image,ScrollView } from 'react-native';
+import { StyleSheet, Text, View,Image,ScrollView ,TouchableOpacity} from 'react-native';
 import { Avatar } from "react-native-paper";
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Notification from "../notification/Notification";
 import ProfileNameComponents from "./ProfileNameComponents";
 import ProfilePowerComponents from "./ProfilePowerComponents";
+
 export default function ProfileHomeScreen({navigation}) {
+  const handleTabEditProfile = () => {
+    return navigation.navigate("Edit Profile");
+  }
+  
   return (
     <View style={style.container}>
       <View style={{marginHorizontal: 16}}>
@@ -17,8 +22,9 @@ export default function ProfileHomeScreen({navigation}) {
 
         <Notification text={'Notification'} hour={'Manage the way we send you all the notifications'} name={'notifications'} color={'#384EC7'}/>
         <Notification text={'Automation'} hour={'Permit the app control your lights'} name={'calendar-outline'} color={'#599BF9'}/>
-        <Notification text={'Profile'} hour={'Edit information in your profile, even your password'} name={'create-outline'} color={'#FFAC3D'}/>
-        
+        <TouchableOpacity  onPress={handleTabEditProfile}>
+          <Notification text={'Profile'} hour={'Edit information in your profile, even your password'} name={'create-outline'} color={'#FFAC3D'}/>
+        </TouchableOpacity>
         <View style={style.logout}>
           <Text style={{textAlign:'center',color:'rgba(75, 97, 221, 0.5)'}}>Log Out</Text>
         </View>
