@@ -18,7 +18,7 @@ export default function ProfileHomeScreen({navigation}) {
         <Notification text={'Notification'} hour={'Manage the way we send you all the notifications'} name={'notifications'} color={'#384EC7'}/>
         <Notification text={'Automation'} hour={'Permit the app control your lights'} name={'calendar-outline'} color={'#599BF9'}/>
         <Notification text={'Profile'} hour={'Edit information in your profile, even your password'} name={'create-outline'} color={'#FFAC3D'}/>
-        <Notification text={'Profile'} hour={'Edit information in your profile, even your password'} name={'create-outline'} color={'#FFAC3D'}/>
+        
         <View style={style.logout}>
           <Text style={{textAlign:'center',color:'rgba(75, 97, 221, 0.5)'}}>Log Out</Text>
         </View>
