@@ -18,8 +18,8 @@ import * as api from "../../api/api";
 
 
 export default function HomeRoomScreen({ navigation, route }) {
-  const {token} = useContext(AuthContext);
-  const { name,roomId,brightness, peopleInHere } = route.params;
+  const {token, refresh, reRender} = useContext(AuthContext);
+  const { name,roomId, brightnessFK,motionFK } = route.params;
   React.useLayoutEffect(() => {
     navigation.setOptions({ headerTitle: name });
   }, [navigation, name]);
@@ -33,19 +33,53 @@ export default function HomeRoomScreen({ navigation, route }) {
   //   return navigation.navigate("HomeLight", {name: "Pendant Lamp"})
   // };
   const [lightList,setLightList] = useState([]);
+  const [brightness,setBrightness] = useState(0);
+  const [peopleInHere,setPeopleInHere] = useState('');
   const handleTapAddLight = () => {
-    return navigation.navigate("HomeAddLight");
+    return navigation.navigate("HomeAddLight",{'roomId':roomId});
   };
   useEffect(() => {
     const fetchData = async() => {
       const res = await api.get({url:`api/lights/room/${roomId}`,
-                            token: token});
+                                token: token});
       // if(res) console.log(res);
       setLightList(res.lights);
     }
     fetchData();
-  },[token,roomId]);
-
+    // console.log("home room re render");
+  },[token,roomId,refresh]);
+  useEffect(() => {
+    const fetchData = async() => {
+      console.log(motionFK,brightnessFK);
+      const res = await api.post({url:`api/adafruit/get`,
+                                data:`feed=${motionFK}`,
+                                token: token});
+      console.log(res.data[0].value);
+      setPeopleInHere(res.data[0].value);
+      const res_1 = await api.post({url:`api/adafruit/get`,
+                                  data:`feed=${brightnessFK}`,
+                                  token: token});
+      console.log(res_1.data[0].value);
+      setBrightness(res_1.data[0].value);
+      // console.log(roomId);
+      // const res_2 = await api.patch({url:`api/rooms/${roomId}/update`,
+      //                               data:`brightness=${res.data[0].value}&peopleInHere=${res_1.data[0].value}`,
+      //                               token: token});
+      // console.log(res_2);
+      // reRender();
+    }
+    fetchData();
+  },[])
+  useEffect(() =>{
+    const fetchData = async() => {
+      const res_2 = await api.patch({url:`api/rooms/${roomId}/update`,
+                                    data:`brightness=${brightness}&peopleInHere=${peopleInHere}`,
+                                    token: token});
+      console.log(res_2);
+      // reRender();
+    }
+    fetchData();
+  },[brightness,peopleInHere]);
   return (
     <View style={styles.container}>
       <View style={styles.infoGrid}>
@@ -71,8 +105,21 @@ export default function HomeRoomScreen({ navigation, route }) {
         {/* <LightContainer isEnabledProp={false} lightName={"Pendant Lamp"} navigation={navigation} key={1} />
         <LightContainer isEnabledProp={false} lightName={"Recessed fixtures"} navigation={navigation} key={2} /> */}
         {
-          lightList.map((light) => (
-            <LightContainer isEnabledProp={light.status} lightName={light.name} navigation={navigation} key={light._id} brightness={light.brightness} />
+          lightList?.map((light) => (
+            <LightContainer isEnabledProp={light.status} 
+                            lightName={light.name} 
+                            navigation={navigation} 
+                            key={light._id} 
+                            brightness={light.brightness} 
+                            lightId={light._id} 
+                            setLightList={setLightList} 
+                            roomId={roomId} 
+                            type={light.type}
+                            color={light.color}
+                            statusFK={light.statusFeedKey}
+                            colorFK={light.colorFeedKey}
+                            brightnessFK={light.brightnessFeedKey}
+            />
           ))
         }
       </ScrollView>

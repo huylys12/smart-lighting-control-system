@@ -14,10 +14,11 @@ import * as api from "../../api/api";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function HomeAddRoomScreen({ navigation, route}) {
-    const { token } = useContext(AuthContext);
+    const { token, reRender } = useContext(AuthContext);
     const [roomName, setRoomName] = useState('');
     const [brightnessFK, setBrightnessFK] = useState('');
     const [motionFK, setMotionFK] = useState('');
+    // const numOfRoom = route.params.numOfRoom;
 
     const handleSave = async() => {
         //Create Room
@@ -26,7 +27,7 @@ export default function HomeAddRoomScreen({ navigation, route}) {
             const res = await api.post({url:"api/rooms/create",
                         data:`name=${roomName}&brightnessFeedKey=${brightnessFK}&motionFeedKey=${motionFK}`,token:token});
             if(res){
-                // console.log(res);
+                reRender();
                 navigation.navigate('HomeHome');
             }
         }

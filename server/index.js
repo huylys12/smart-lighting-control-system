@@ -20,6 +20,7 @@ const UsersRouter = require("./routes/UsersRouter");
 const NetworksRouter = require("./routes/NetworksRouter");
 const RoomsRouter = require("./routes/RoomsRouter");
 const LightsRouter = require("./routes/LightsRouter");
+const AdafruitRouter = require("./routes/AdafruitRouter");
 
 const app = express();
 
@@ -54,10 +55,13 @@ const usersRouter = new UsersRouter();
 const networksRouter = new NetworksRouter();
 const roomsRouter = new RoomsRouter();
 const lightsRouter = new LightsRouter();
+const adafruitRouter = new AdafruitRouter();
+
 app.use("/api/accounts", usersRouter.router);
 app.use("/api/networks", networksRouter.router);
 app.use("/api/rooms", roomsRouter.router);
 app.use("/api/lights", lightsRouter.router);
+app.use("/api/adafruit",adafruitRouter.router);
 
 const adafruitController = new AdafruitController();
 // setInterval(() => adafruit.updateLight("Living Room","pendantlampbrightness","pendantlampstatus"),3000);

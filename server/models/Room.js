@@ -19,11 +19,15 @@ const roomSchema = mongoose.Schema({
     type: String,
     enum: ['living', 'kitchen', 'bedroom', 'bathroom', 'readingroom']
   },
-  status: Boolean,
+  status: {
+    type: Boolean,
+    default: false
+  },
   brightness:  {
     type: Number,
     min: 0,
     max: 100,
+    default: 0
   },
   peopleInHere: {
     type: String,
@@ -36,8 +40,10 @@ const roomSchema = mongoose.Schema({
     max: 5,
     default: 0
   },
-  
-  canAdjustAutomatically: Boolean,
+  canAdjustAutomatically:{
+    type: Boolean,
+    default: false
+  },
   brightnessFeedKey: String, 
   motionFeedKey: String, 
 });

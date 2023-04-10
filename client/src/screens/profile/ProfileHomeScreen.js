@@ -1,11 +1,23 @@
-import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
+import { StyleSheet, Text, View, Image, ScrollView,TouchableOpacity } from "react-native";
 import { Avatar } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import NotificationContainer from "../../components/NotificationContainer";
 import ProfileName from "../../components/ProfileName";
 import ProfilePower from "../../components/ProfilePower";
+import * as api from "../../api/api";
+import { AuthContext } from "../../context/AuthContext";
+import { useContext } from "react";
+
 export default function ProfileHomeScreen({ navigation }) {
+  const { token } = useContext(AuthContext);
+  const handleLogout = async() =>{
+    const res = await api.get({url:"api/accounts/logout",token:token});
+    if(res){
+      console.log("Logout: ",res);
+      navigation.navigate("Welcome");
+    }
+  }
   return (
     <View style={style.container}>
       <View>
@@ -40,13 +52,13 @@ export default function ProfileHomeScreen({ navigation }) {
           name={"create-outline"}
           color={"#FFAC3D"}
         />
-        <View style={style.logout}>
+        <TouchableOpacity style={style.logout} onPress={handleLogout}>
           <Text
             style={{ textAlign: "center", color: "rgba(75, 97, 221, 0.5)" }}
           >
             Log Out
           </Text>
-        </View>
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );

@@ -16,27 +16,18 @@ import { AuthContext } from "../../context/AuthContext";
 import * as api from "../../api/api";
 
 export default function HomeHomeScreen({ navigation, route }) {
-  const {token} = useContext(AuthContext);
-  // const [isEnabled, setIsEnabled] = useState(false);
+  const {token, refresh} = useContext(AuthContext);
 
-  // const toggleSwitch = () => {
-  //   setIsEnabled((previousState) => !previousState);
-  // };
-
-  // const handleTapRoomItem = () => {
-  //   return navigation.navigate('HomeRoom', {
-  //     name: "Living Room"});
-  // };
   const [roomList,setRoomList] = useState([]);
 
   useEffect(() => {
     const fetchData = async() =>{
       const res = await api.get({url:"api/rooms/all",token:token});
-      // console.log(res.rooms);
       setRoomList(res.rooms);
     }
     fetchData();
-  },[token]);
+  },[token,refresh]);
+
 
   const handleTapAddRoom = () => {
     return navigation.navigate("HomeAddRoom");
@@ -67,7 +58,17 @@ export default function HomeHomeScreen({ navigation, route }) {
         <View style={styles.roomList.roomGrid}>
           {
             roomList.map((room) => (
-              <RoomContainer isEnabledProp={room.status} navigation={navigation} numLight={room.numOfLights} roomName={room.name} key={room._id} roomId={room._id} brightness={room.brightness} peopleInHere={room.peopleInHere} />
+              <RoomContainer isEnabledProp={room.status} 
+                              navigation={navigation} 
+                              numLight={room.numOfLights} 
+                              roomName={room.name} key={room._id} 
+                              roomId={room._id}
+                              // brightness={room.brightness} 
+                              // peopleInHere={room.peopleInHere} 
+                              setRoomList={setRoomList}
+                              brightnessFK={room.brightnessFeedKey}
+                              motionFK={room.motionFeedKey}
+              />
             ))
           }
           {/* <RoomContainer isEnabledProp={true} navigation={navigation} numLight={10} roomName={"Living Room"} key={1} />
