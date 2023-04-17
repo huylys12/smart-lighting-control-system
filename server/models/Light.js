@@ -16,13 +16,25 @@ const lightSchema = mongoose.Schema({
     type: String,
     enum: ['color', 'brightness']
   },
-  status: Boolean,
+  status: {
+    type: Boolean,
+    default: false
+  },
   brightness: {
     type: Number,
     min: 0,
-    max: 100
+    max: 100,
+    default:0
   },
-  canAdjustAutomatically: Boolean,
+  color: {
+    type: String,
+    enum: ['red','orange','yellow','green','blue','indigo','violet','white','black'],
+    default: 'white'
+  },
+  canAdjustAutomatically:{
+    type: Boolean,
+    default: false
+  },
   brightnessFeedKey: String,
   colorFeedKey: String,
   statusFeedKey: String

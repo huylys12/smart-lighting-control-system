@@ -11,23 +11,50 @@ import {
   import Ionicons from "react-native-vector-icons/Ionicons";
   import Slider from "@react-native-community/slider";
   import GroupsOutlineIcon from "react-native-vector-icons/MaterialIcons";
-  import React, { useState } from "react";
+  import React, { useState,useContext,useEffect } from "react";
+  import * as api from "../api/api";
+  import { AuthContext } from "../context/AuthContext";
 
-export default function RoomContainer({navigation,roomName,numLight,isEnabledProp,roomId, brightness,peopleInHere}){
+export default function RoomContainer({navigation,roomName,numLight,isEnabledProp,roomId, brightness,peopleInHere,setRoomList,brightnessFK,motionFK}){
+    const { token } = useContext(AuthContext);
     const [isEnabled, setIsEnabled] = useState(isEnabledProp);
-    const toggleSwitch = () => {
-        setIsEnabled((previousState) => !previousState);
+    const toggleSwitch = async() => {
+        setIsEnabled((previousState) => !previousState)
     };
+    useEffect(() => {
+      console.log(isEnabled);
+      const update = async() => {
+        const res = await api.patch({url:`api/rooms/${roomId}/update`,data:`status=${isEnabled}`,token:token});
+        console.log(res);
+      };
+      update();
+    },[isEnabled])
     const handleTapRoomItem = () => {
         return navigation.navigate('HomeRoom', {
-            name: roomName,roomId:roomId,brightness:brightness,peopleInHere:peopleInHere});
+            name: roomName,
+            roomId:roomId,
+            brightness:brightness,
+            peopleInHere:peopleInHere,
+            motionFK:motionFK,
+            brightnessFK:brightnessFK
+        });
     };
+    const handleDelete = async() => {
+      const res = await api._delete({url:`api/rooms/${roomId}/delete`,token:token});
+      if(res){
+        const res1 = await api.get({url:"api/rooms/all",token:token});
+        if(res1) setRoomList(res1.rooms);
+        // console.log(res1.rooms);
+      }
+    }
     return (
         <TouchableOpacity >
             <View style={styles.roomItem.container}>
-              <TouchableOpacity style={{display:"flex",justifyContent:"flex-end",flexDirection:"row"}}>
-                <Text style={{fontSize: 12,fontWeight:700,color:"#384EC7"}}>Delete</Text>
-              </TouchableOpacity>
+              <View style={{display:"flex",justifyContent:"flex-end",flexDirection:"row"}}>
+                <TouchableOpacity onPress={handleDelete}>
+                  <Text style={{fontSize: 12,fontWeight:700,color:"#384EC7"}}>Delete</Text>
+                </TouchableOpacity>
+              </View>
               <TouchableOpacity onPress={handleTapRoomItem}>
               <View style={styles.roomItem.top}>
                 <GroupsOutlineIcon

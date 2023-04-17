@@ -3,10 +3,14 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-nativ
 import { useNavigation } from '@react-navigation/native';
 import { Image } from 'react-native';
 
+// import CookieManager from '@react-native-community/react-native-cookies';
+
 export default function SignUpScreen({navigation}) {
   
-    const myImage = require('../../../assets/Nlex.png');
-
+  const myImage = require('../../../assets/Nlex.png');
+  // CookieManager.get('refreshToken').then((cookie) => {
+  //   console.log(cookie);
+  // });
   return (
     <View style={styles.container}>
       
