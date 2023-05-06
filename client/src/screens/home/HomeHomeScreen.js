@@ -28,7 +28,6 @@ export default function HomeHomeScreen({ navigation, route }) {
     fetchData();
   },[token,refresh]);
 
-
   const handleTapAddRoom = () => {
     return navigation.navigate("HomeAddRoom");
   }

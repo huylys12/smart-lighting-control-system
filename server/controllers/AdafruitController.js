@@ -3,7 +3,7 @@ const Light = require("../models/Light");
 
 module.exports = class Adafruit{
     async getFromAdafruit(req,res){
-        fetch(`https://io.adafruit.com/api/v2/PhucHo/feeds/${req.body.feed}/data?X-AIO-Key=aio_SZcW51SPlaGGuQzngiNFRZeJp72t&limit=1`)
+        fetch(`https://io.adafruit.com/api/v2/PhucHo/feeds/${req.body.feed}/data?X-AIO-Key=aio_Ttut541oJ3lNasAnPoNYXmhowgmF&limit=1`)
         .then(data => data.json())
         .then((data) => res.status(200).json({"data":data}))
         .catch((err) => {
@@ -14,7 +14,7 @@ module.exports = class Adafruit{
         })
     }
     async postToAdafruit(req,res){
-        await fetch(`https://io.adafruit.com/api/v2/PhucHo/feeds/${req.body.feed}/data?X-AIO-Key=aio_SZcW51SPlaGGuQzngiNFRZeJp72t`,{
+        await fetch(`https://io.adafruit.com/api/v2/PhucHo/feeds/${req.body.feed}/data?X-AIO-Key=aio_Ttut541oJ3lNasAnPoNYXmhowgmF`,{
             'method': 'POST',
             'headers': {
                 'Content-type': 'application/json'

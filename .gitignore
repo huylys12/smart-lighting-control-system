@@ -5,6 +5,6 @@ client/secret.js
 client/node_modules/
 client/.expo/
 client/package-lock.json
-
+simulator/secret.js
 # macOS
 .DS_Store

@@ -15,23 +15,20 @@ import LightContainer from "../../components/LightContainer";
 import RoomInfo from "../../components/RoomInfo";
 import { AuthContext } from "../../context/AuthContext";
 import * as api from "../../api/api";
+import Paho from 'paho-mqtt';
+import { ADAFRUIT_USER, ADAFRUIT_KEY } from "../../../secret";
+
 
 
 export default function HomeRoomScreen({ navigation, route }) {
+  const client = new Paho.Client('wss://io.adafruit.com:443/mqtt/', '');
   const {token, refresh, reRender} = useContext(AuthContext);
   const { name,roomId, brightnessFK,motionFK } = route.params;
+  
   React.useLayoutEffect(() => {
     navigation.setOptions({ headerTitle: name });
   }, [navigation, name]);
 
-  // const [isEnabled, setIsEnabled] = useState(false);
-  // const toggleSwitch = () => {
-  //   setIsEnabled((previousState) => !previousState);
-  // };
-
-  // const handleTapLight = () => {
-  //   return navigation.navigate("HomeLight", {name: "Pendant Lamp"})
-  // };
   const [lightList,setLightList] = useState([]);
   const [brightness,setBrightness] = useState(0);
   const [peopleInHere,setPeopleInHere] = useState('');
@@ -48,28 +45,63 @@ export default function HomeRoomScreen({ navigation, route }) {
     fetchData();
     // console.log("home room re render");
   },[token,roomId,refresh]);
+
+  useEffect(() => {
+    client.connect({
+      useSSL: true,
+      userName: ADAFRUIT_USER,
+      password: ADAFRUIT_KEY,
+      onSuccess: () => {
+        console.log('Connected to Adafruit');
+        client.subscribe(`PhucHo/feeds/${brightnessFK}`);
+        client.subscribe(`PhucHo/feeds/${motionFK}`);
+      },
+      onFailure: (message) => {
+        console.log('Failed to connect to Adafruit: ', message.errorMessage);
+      },
+    });
+    client.onMessageArrived = (message) => {
+      console.log('Message arrived on topic:', message.destinationName, message.payloadString);
+      if(message.destinationName == `PhucHo/feeds/${brightnessFK}`){
+        setBrightness(message.payloadString);
+        console.log("hello there");
+      }else if(message.destinationName == `PhucHo/feeds/${motionFK}`){
+        setPeopleInHere(message.payloadString);
+      }
+    }
+    return () => {
+      client.disconnect({
+        onSuccess: function() {
+          console.log("Disconnected successfully.");
+        },
+        onFailure: function(err) {
+          console.log("Disconnect failed: " + err.errorMessage);
+        }
+      });
+    }
+  },[]);
   useEffect(() => {
     const fetchData = async() => {
-      console.log(motionFK,brightnessFK);
+      // console.log(motionFK,brightnessFK);
       const res = await api.post({url:`api/adafruit/get`,
                                 data:`feed=${motionFK}`,
                                 token: token});
-      console.log(res.data[0].value);
+      // console.log(res.data[0].value);
       setPeopleInHere(res.data[0].value);
       const res_1 = await api.post({url:`api/adafruit/get`,
                                   data:`feed=${brightnessFK}`,
                                   token: token});
-      console.log(res_1.data[0].value);
+      // console.log(res_1.data[0].value);
       setBrightness(res_1.data[0].value);
-      // console.log(roomId);
-      // const res_2 = await api.patch({url:`api/rooms/${roomId}/update`,
-      //                               data:`brightness=${res.data[0].value}&peopleInHere=${res_1.data[0].value}`,
-      //                               token: token});
-      // console.log(res_2);
-      // reRender();
     }
+    // const interval = setInterval(async() => {
+    //   fetchData();
+    // },30000);
     fetchData();
-  },[])
+    // return clearInterval(id);
+    // return () => clearInterval(interval);
+  },[]);
+
   useEffect(() =>{
     const fetchData = async() => {
       const res_2 = await api.patch({url:`api/rooms/${roomId}/update`,

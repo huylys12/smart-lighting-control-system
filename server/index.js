@@ -34,21 +34,25 @@ const whitelist = process.env.WHITELISTED_DOMAINS
   : [];
 
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-
+  // origin: function (origin, callback) {
+  //   if (!origin || whitelist.indexOf(origin) !== -1) {
+  //     callback(null, true);
+  //   } else {
+  //     callback(new Error("Not allowed by CORS"));
+  //   }
+  // },
+  
   credentials: true,
+  origin: 'http://192.168.1.4:19000'
 };
 app.use(cors(corsOptions));
 app.use(passport.initialize());
 
 app.get("/", function (req, res) {
-  res.send({ status: "success" });
+  // res.send({ status: "success" });
+  const cookies = req.cookies;
+  console.log(cookies);
+  res.json(cookies);
 });
 
 const usersRouter = new UsersRouter();

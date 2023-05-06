@@ -3,12 +3,12 @@ const Light = require("../models/Light");
 
 module.exports = class Adafruit{
     async getFromAdafruit(feed){
-        const data = await fetch(`https://io.adafruit.com/api/v2/PhucHo/feeds/${feed}/data?X-AIO-Key=aio_sAge18SvxYrgARDhXy4UO6GsusNV`);
+        const data = await fetch(`https://io.adafruit.com/api/v2/${process.env.ADAFRUIT_USER}/feeds/${feed}/data?X-AIO-Key=${process.env.ADAFRUIT_KEY}`);
         const res = await data.json();
         return res;
     }
     async postToAdafruit(data,feed){
-        await fetch(`https://io.adafruit.com/api/v2/PhucHo/feeds/${feed}/data?X-AIO-Key=aio_sAge18SvxYrgARDhXy4UO6GsusNV`,{
+        await fetch(`https://io.adafruit.com/api/v2/${process.env.ADAFRUIT_USER}/feeds/${feed}/data?X-AIO-Key=${process.env.ADAFRUIT_KEY}`,{
             'method': 'POST',
             'headers': {
                 'Content-type': 'application/json'
