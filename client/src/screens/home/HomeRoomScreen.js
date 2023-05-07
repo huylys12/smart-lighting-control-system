@@ -64,7 +64,7 @@ export default function HomeRoomScreen({ navigation, route }) {
       console.log('Message arrived on topic:', message.destinationName, message.payloadString);
       if(message.destinationName == `PhucHo/feeds/${brightnessFK}`){
         setBrightness(message.payloadString);
-        console.log("hello there");
+        // console.log("hello there");
       }else if(message.destinationName == `PhucHo/feeds/${motionFK}`){
         setPeopleInHere(message.payloadString);
       }

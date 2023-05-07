@@ -17,12 +17,12 @@ export default function LogInScreen({navigation}) {
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
-  useEffect(() => {
-    fetch('http://192.168.1.4:3000',{
-      headers:{'Content-Type': 'application/x-www-form-urlencoded'},
-      credentials:'include'
-    }).then(res => res.json()).then(res=>console.log(res));
-  },[]);
+  // useEffect(() => {
+  //   fetch('http://192.168.1.4:3000',{
+  //     headers:{'Content-Type': 'application/x-www-form-urlencoded'},
+  //     credentials:'include'
+  //   }).then(res => res.json()).then(res=>console.log(res));
+  // },[]);
   const handleLogin = async() => {
     const res = await api.post({url:"api/accounts/login",
               data:`username=${username}&password=${password}`});
