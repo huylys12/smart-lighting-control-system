@@ -5,6 +5,7 @@ import CheckBox from "../../components/Checkbox";
 import { AntDesign,FontAwesome  } from '@expo/vector-icons';
 import { AuthContext } from '../../context/AuthContext';
 import * as api from '../../api/api'
+import { FloatingLabelInput } from 'react-native-floating-label-input';
 
 
 
@@ -16,6 +17,29 @@ export default function LogInScreen({navigation}) {
   const [password,setPassword] = useState('');
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
+  };
+  const [isEmailValid, setIsEmailValid] = useState(true);
+
+  const handleUsernameChange = (value) => {
+    setUsername(value);
+  
+    // Check if the entered username is a valid email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValidEmail = emailRegex.test(value);
+  
+    // Update state to indicate whether email is valid
+    setIsEmailValid(isValidEmail);
+  };
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+
+  const handlePasswordChange = (value) => {
+    setPassword(value);
+  
+    // Check if the entered password is at least 8 characters long
+    const isValidPassword = value.length >= 8;
+  
+    // Update state to indicate whether password is valid
+    setIsPasswordValid(isValidPassword);
   };
   const handleLogin = async() => {
     const res = await api.post({url:"api/accounts/login",
@@ -30,19 +54,54 @@ export default function LogInScreen({navigation}) {
       navigation.navigate("Main")
     }
   }
+  
   return (
     <View style={styles.container}>
       <Text style={styles.signUpText}>Sign In</Text>
       <Text style={styles.welcomeText}>Hello! Welcome Back</Text>
       <View style={styles.inputBox}>
-        <TextInput placeholder="Enter your Username" style={styles.input} onChangeText={(value) => setUsername(value)} />
+      <FloatingLabelInput
+            label="Enter Your Email"
+            value={username}
+            keyboardType="ascii-capable"
+            onChangeText={handleUsernameChange}
+            customLabelStyles={{colorFocused:"#717171",colorBlurred:"#717171"}}
+            containerStyles={{
+                  borderWidth: 1,
+                  paddingHorizontal: 8,
+                  backgroundColor: '#ffffff',
+                  borderColor: isEmailValid ? '#E1E1E1' : 'red',
+                  borderRadius: 8,
+                  marginBottom: 8,
+                  height: 60
+      }}
+    />
+   
       </View>
       
       <View style={styles.inputBox}>
-        <TextInput placeholder="Enter your Password" secureTextEntry={!showPassword} style={styles.input} onChangeText={(value) => setPassword(value)} />
+      <FloatingLabelInput
+            label="Enter Your Password"
+            value={password}
+            keyboardType="ascii-capable"
+            secureTextEntry={!showPassword}
+            onChangeText={handlePasswordChange}
+            customLabelStyles={{colorFocused:"#717171",colorBlurred:"#717171"}}
+            containerStyles={{
+                  borderWidth: 1,
+                  paddingHorizontal: 8,
+                  backgroundColor: '#ffffff',
+                  borderColor: isPasswordValid ? '#E1E1E1' : 'red',
+                  borderRadius: 8,
+                  marginBottom: 8,
+                  height: 60
+                }}
+    />
+   
         <TouchableOpacity style={styles.showButton} onPress={toggleShowPassword}>
           <Text style={styles.showButtonText}>{showPassword ? 'Hide' : 'Show'}</Text>
         </TouchableOpacity>
+        
       </View>
       
       <TouchableOpacity style={styles.signUpButton} onPress={handleLogin} >
@@ -89,6 +148,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     
   },
+  errorMessage: {
+    color: 'red',
+    fontSize: 12,
+    marginTop: 4
+  },
   signUpText: {
     position: 'absolute',
     top: 50,
@@ -117,12 +181,10 @@ const styles = StyleSheet.create({
     height: 58,
     paddingHorizontal: 12,
     paddingVertical: 10,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#E1E1E1',
     borderRadius: 6,
-    flexDirection: 'row',
-    alignItems: 'center',
+    marginBottom:10,
+    flexDirection: 'collumn',
+    alignItems: 'left',
     top:20,
   },
   input: {
@@ -133,7 +195,8 @@ const styles = StyleSheet.create({
   },
   showButton: {
     padding: 8,
-    marginLeft: 10,
+    left: 250,
+    bottom:55,
     
     borderRadius: 6,
   },
@@ -146,7 +209,7 @@ const styles = StyleSheet.create({
   signUpButton: {
     paddingHorizontal: 32,
     paddingVertical: 0,
-    width: 343,
+    width: 320,
     height: 48,
     backgroundColor: '#4B61DD',
     borderWidth: 1,
