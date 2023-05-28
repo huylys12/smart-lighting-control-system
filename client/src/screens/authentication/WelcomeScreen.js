@@ -13,8 +13,6 @@ export default function SignUpScreen({navigation}) {
   // });
   return (
     <View style={styles.container}>
-      
-      
       <Image source={myImage} style={styles.img} />
       <Text style={styles.Welcometext}>Welcome to Nlex</Text>
       <Text style={styles.text}>We have an amazing space in our app, Join us and let’s try!</Text>

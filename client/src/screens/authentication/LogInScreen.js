@@ -1,4 +1,4 @@
-import { useState,useContext } from 'react';
+import { useState,useContext, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import CheckBox from "../../components/Checkbox";
@@ -17,6 +17,12 @@ export default function LogInScreen({navigation}) {
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+  // useEffect(() => {
+  //   fetch('http://192.168.1.4:3000',{
+  //     headers:{'Content-Type': 'application/x-www-form-urlencoded'},
+  //     credentials:'include'
+  //   }).then(res => res.json()).then(res=>console.log(res));
+  // },[]);
   const handleLogin = async() => {
     const res = await api.post({url:"api/accounts/login",
               data:`username=${username}&password=${password}`});
@@ -30,6 +36,7 @@ export default function LogInScreen({navigation}) {
       navigation.navigate("Main")
     }
   }
+
   return (
     <View style={styles.container}>
       <Text style={styles.signUpText}>Sign In</Text>

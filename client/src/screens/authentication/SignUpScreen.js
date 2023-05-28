@@ -29,8 +29,6 @@ export default function SignUpScreen({navigation}) {
       <Text style={styles.signUpText}>Sign Up</Text>
       <Text style={styles.welcomeText}>Hello! Welcome Back</Text>
       <Text style={styles.welcomeText}>{process.env.API_BACKEND_BASE_URL}</Text>
-      
-      
       <View style={styles.inputBox}>
         <TextInput placeholder="Enter your name" style={styles.input} onChangeText={(value) => setName(value)} />
       </View>

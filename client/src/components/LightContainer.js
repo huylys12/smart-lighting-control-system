@@ -36,12 +36,12 @@ export default function LightContainer({navigation,lightName,isEnabledProp,brigh
     },[isEnabledProp]);
 
     useEffect(() => {
-      console.log(isEnabled);
+      // console.log(isEnabled);
       const update = async() => {
         const res = await api.patch({url:`api/lights/${lightId}/update`,data:`status=${isEnabled}`,token:token});
-        console.log(res);
+        // console.log(res);
         const res_1 = await api.post({url:'api/adafruit/post',data:`feed=${statusFK}&data=${isEnabled ? '1' : '0'}`,token:token});
-        console.log(res_1);
+        // console.log(res_1);
       };
       update();
     },[isEnabled]);

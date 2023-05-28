@@ -18,7 +18,6 @@ export default function HomeAddRoomScreen({ navigation, route}) {
     const [roomName, setRoomName] = useState('');
     const [brightnessFK, setBrightnessFK] = useState('');
     const [motionFK, setMotionFK] = useState('');
-    // const numOfRoom = route.params.numOfRoom;
 
     const handleSave = async() => {
         //Create Room

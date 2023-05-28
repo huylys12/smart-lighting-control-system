@@ -8,6 +8,7 @@ export async function get({url, token}){
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': `Bearer ${token}`
             },
+            credentials: 'include',
         });
         const res_data = await res.json();
         return res_data;
@@ -24,7 +25,8 @@ export async function post({url,data,token}){
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': `Bearer ${token}`
             },
-            body: data
+            body: data,
+            credentials: 'include',
         });
         const res_data = await res.json();
         return res_data;
@@ -41,6 +43,7 @@ export async function _delete({url,token}){
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': `Bearer ${token}`
             },
+            credentials: 'include',
         });
         const data = await res.json();
         return data;
@@ -57,7 +60,8 @@ export async function patch({url,data,token}){
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': `Bearer ${token}`
             },
-            body: data
+            body: data,
+            credentials: 'include',
         });
         const res_data = await res.json();
         return res_data;
