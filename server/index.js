@@ -19,6 +19,7 @@ db.connect();
 const UsersRouter = require("./routes/UsersRouter");
 const NetworksRouter = require("./routes/NetworksRouter");
 const RoomsRouter = require("./routes/RoomsRouter");
+const NotificationsRouter = require("./routes/NotificationsRouter");
 const LightsRouter = require("./routes/LightsRouter");
 const AdafruitRouter = require("./routes/AdafruitRouter");
 
@@ -58,12 +59,14 @@ const usersRouter = new UsersRouter();
 const networksRouter = new NetworksRouter();
 const roomsRouter = new RoomsRouter();
 const lightsRouter = new LightsRouter();
+const notificationsRouter = new NotificationsRouter();
 const adafruitRouter = new AdafruitRouter();
 
 app.use("/api/accounts", usersRouter.router);
 app.use("/api/networks", networksRouter.router);
 app.use("/api/rooms", roomsRouter.router);
 app.use("/api/lights", lightsRouter.router);
+app.use("/api/notifications", notificationsRouter.router);
 app.use("/api/adafruit", adafruitRouter.router);
 
 const adafruitController = new AdafruitController();
