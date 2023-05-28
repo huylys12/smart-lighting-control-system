@@ -46,8 +46,7 @@ export default function SignUpScreen({navigation}) {
     updateToken(res.token);
     navigation.navigate('LogIn');
   }
-  
-  
+
   return (
     <View style={styles.container}>
       <Text style={styles.signUpText}>Sign Up</Text>
@@ -55,7 +54,7 @@ export default function SignUpScreen({navigation}) {
       <Text style={styles.welcomeText}>{process.env.API_BACKEND_BASE_URL}</Text>
       <View style={styles.inputBox}>
       <FloatingLabelInput
-                label="Enter Your Account"
+                label="Enter Your Name"
                 value={name}
                 keyboardType="ascii-capable"
                 onChangeText={value => setName(value)}
@@ -139,7 +138,7 @@ const styles = StyleSheet.create({
   signUpText: {
     position: 'absolute',
     top: 50,
-    left: 10,
+    left: 15,
     width: 132,
     height: 40,
     fontWeight: '700',
@@ -150,7 +149,7 @@ const styles = StyleSheet.create({
   welcomeText: {
     position: 'absolute',
     top: 100,
-    left: 10,
+    left: 15,
     width: 343,
     height: 39,
     fontWeight: '400',
@@ -162,7 +161,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: 343,
     height: 58,
-    paddingHorizontal: 12,
+    // paddingHorizontal: 12,
     paddingVertical: 10,
     borderRadius: 6,
     flexDirection: 'row',
@@ -201,7 +200,7 @@ const styles = StyleSheet.create({
   signUpButton: {
     paddingHorizontal: 32,
     paddingVertical: 0,
-    width: 320,
+    width: 343,
     height: 48,
     backgroundColor: '#4B61DD',
     borderWidth: 1,
@@ -224,7 +223,6 @@ const styles = StyleSheet.create({
     fontSize: 17,
     lineHeight: 22,
     color: '#F8F8F8',
-    
   },
   agreementText: {
     width: 343,
