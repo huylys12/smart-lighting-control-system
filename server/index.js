@@ -34,17 +34,16 @@ const whitelist = process.env.WHITELISTED_DOMAINS
   : [];
 
 const corsOptions = {
-  // origin: function (origin, callback) {
-  //   if (!origin || whitelist.indexOf(origin) !== -1) {
-  //     callback(null, true);
-  //   } else {
-  //     callback(new Error("Not allowed by CORS"));
-  //   }
-  // },
-  
+  origin: function (origin, callback) {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
-  origin: 'http://192.168.1.4:19000'
 };
+
 app.use(cors(corsOptions));
 app.use(passport.initialize());
 
@@ -65,12 +64,12 @@ app.use("/api/accounts", usersRouter.router);
 app.use("/api/networks", networksRouter.router);
 app.use("/api/rooms", roomsRouter.router);
 app.use("/api/lights", lightsRouter.router);
-app.use("/api/adafruit",adafruitRouter.router);
+app.use("/api/adafruit", adafruitRouter.router);
 
 const adafruitController = new AdafruitController();
 // setInterval(() => adafruit.updateLight("Living Room","pendantlampbrightness","pendantlampstatus"),3000);
 
 const port = process.env.PORT;
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/`);
+  console.log(`Server running at PORT ${port}`);
 });

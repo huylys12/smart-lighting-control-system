@@ -9,39 +9,6 @@ const {
 } = require("../utils/authenticate");
 
 module.exports = class UsersController {
-  // async authenticate(req, res, next) {
-  //   if (req.isAuthenticated()) {
-  //     console.log(req.user);
-  //     return next();
-  //   } else {
-  //     return res.status(401).json({
-  //       success: false,
-  //       msg: "Unauthorized access. Please, check if you are logged in.",
-  //     });
-  //   }
-  // }
-
-  // async register(req, res) {
-  //   User.register({ username: req.body.username }, req.body.password, function (err, user) {
-  //     if (err) {
-  //       console.log(err);
-  //       return res.status(500).json({
-  //         success: "false",
-  //         status: "Registration failed",
-  //         msg: "Failed to register user. Please, try again later.",
-  //       });
-  //     } else {
-  //       passport.authenticate("local")(req, res, () => {
-  //         return res.status(200).json({
-  //           success: true,
-  //           status: "User Registered.",
-  //           user: user,
-  //           msg: "User is registered successfully.",
-  //         });
-  //       });
-  //     }
-  //   });
-  // }
   async register(req, res, next) {
     User.register(
       new User({ username: req.body.username }),
@@ -141,30 +108,6 @@ module.exports = class UsersController {
       res.send("Unauthorized");
     }
   }
-  // async login(req, res) {
-  //   const user = new User({
-  //     username: req.body.username,
-  //     password: req.body.password,
-  //   });
-  //   req.login(user, function (err) {
-  //     if (err) {
-  //       return res.status(403).json({
-  //         success: false,
-  //         status: "Authentication failed",
-  //         msg: "Incorrect username or password.",
-  //       });
-  //     } else {
-  //       passport.authenticate("local")(req, res, () => {
-  //         return res.status(200).json({
-  //           success: true,
-  //           status: "Authentication successful",
-  //           msg: "Login successful",
-  //           user: user,
-  //         });
-  //       });
-  //     }
-  //   });
-  // }
 
   async logout(req, res, next) {
     const { signedCookies } = req;
