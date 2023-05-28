@@ -1,4 +1,4 @@
-import { useState,useContext } from 'react';
+import { useState,useContext, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import CheckBox from "../../components/Checkbox";
@@ -18,6 +18,7 @@ export default function LogInScreen({navigation}) {
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+  
   const [isEmailValid, setIsEmailValid] = useState(true);
 
   const handleUsernameChange = (value) => {
@@ -41,6 +42,7 @@ export default function LogInScreen({navigation}) {
     // Update state to indicate whether password is valid
     setIsPasswordValid(isValidPassword);
   };
+
   const handleLogin = async() => {
     const res = await api.post({url:"api/accounts/login",
               data:`username=${username}&password=${password}`});
@@ -54,7 +56,7 @@ export default function LogInScreen({navigation}) {
       navigation.navigate("Main")
     }
   }
-  
+
   return (
     <View style={styles.container}>
       <Text style={styles.signUpText}>Sign In</Text>

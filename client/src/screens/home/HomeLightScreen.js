@@ -41,7 +41,6 @@ export default function HomeLightScreen({ navigation, route }) {
       const res_1 = await api.post({url:'api/adafruit/post',data:`feed=${colorFK}&data=${colorNum[selected]}`,token:token});
       console.log(res_1);
       reRender();
-      
     };
     update();
   },[selected]);
@@ -54,7 +53,6 @@ export default function HomeLightScreen({ navigation, route }) {
       const res_1 = await api.post({url:'api/adafruit/post',data:`feed=${brightnessFK}&data=${sliderValue}`,token:token});
       console.log(res_1);
       reRender();
-      
     };
     update();
   },[sliderValue]);

@@ -33,6 +33,7 @@
     "expo-status-bar": "~1.4.2",
     "install": "^0.13.0",
     "moment": "^2.29.4",
+    "paho-mqtt": "^1.1.0",
     "react": "18.2.0",
     "react-native": "0.71.3",
     "react-native-calendars": "^1.1294.0",

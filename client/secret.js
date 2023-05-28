@@ -1,3 +1,3 @@
-const SERVER_URL = "http://192.168.0.124:3000";
+const SERVER_URL = "http://172.20.10.13:3000";
 
 export {SERVER_URL};

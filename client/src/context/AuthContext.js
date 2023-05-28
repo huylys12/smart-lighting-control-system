@@ -9,15 +9,18 @@ export const AuthProvider = ({ children }) => {
   const [userId,setUserId] = useState("");
   const [refresh,setRefresh] = useState(false);
   useEffect(() => {
-    const intervalId = setInterval(async() => {
+    const refreshToken = async() => {
       const res = await api.post({url:'api/accounts/refreshToken'})
       if(res){
         console.log("Refreshed token");
         setToken(res.token);
       }
-    },14*60*1000);
+    }
+    const intervalId = setInterval(() => {
+      refreshToken();
+    },10*60*1000);
 
-    // return clearInterval(intervalId);
+    return () => clearInterval(intervalId);
   },[]);
   
   const updateToken = (newValue) => {
