@@ -133,7 +133,28 @@ module.exports = class UsersController {
     );
   }
 
-  async updateUserInfo(req, res) {}
+  async updateUserInfo(req, res) {
+    const { signedCookies } = req;
+    const { refreshToken } = signedCookies;
+    const { name, avatar } = req.body;
 
-  async updateEmail(req, res) {}
+    User.updateOne(
+      { _id: req.user._id },
+      {
+        $set: {
+          name: name,
+          avatar: avatar
+        },
+      }
+    )
+      .then((result) => {
+        res.status(200).json({ success: true, msg: "User info updated" });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          sucess: false,
+          msg: "Encountered an error while editing user info. Please, try again.",
+        });
+      });
+  }
 };

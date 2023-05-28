@@ -1,3 +1,3 @@
-const SERVER_URL = "http://172.20.10.13:3000";
+const SERVER_URL = "https://smart-lighting-control-system-api.onrender.com";
 
 export {SERVER_URL};

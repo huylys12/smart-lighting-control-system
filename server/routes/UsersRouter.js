@@ -22,5 +22,7 @@ module.exports = class UsersRouter {
     this.router.get("/me", verifyUserWithJwt, (req, res) => {
       res.send(req.user);
     })
+
+    this.router.patch("/update", verifyUserWithJwt, this.usersController.updateUserInfo);
   }
 };

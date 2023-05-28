@@ -15,6 +15,11 @@ const Session = new mongoose.Schema({
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
+    default: "",
+  },
+  avatar: {
+    type: String,
+    default: "https://cdn-icons-png.flaticon.com/512/4128/4128244.png",
   },
   authStrategy: {
     type: String,
