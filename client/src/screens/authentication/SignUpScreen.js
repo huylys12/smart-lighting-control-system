@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import * as api from '../../api/api.js';
-
+import { FloatingLabelInput } from 'react-native-floating-label-input';
 import { AuthContext } from '../../context/AuthContext.js';
 
 export default function SignUpScreen({navigation}) {
@@ -12,6 +12,30 @@ export default function SignUpScreen({navigation}) {
   const [password,setPassword] = useState('');
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
+  };
+
+  const [isEmailValid, setIsEmailValid] = useState(true);
+
+  const handleUsernameChange = (value) => {
+    setUsername(value);
+  
+    // Check if the entered username is a valid email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValidEmail = emailRegex.test(value);
+  
+    // Update state to indicate whether email is valid
+    setIsEmailValid(isValidEmail);
+  };
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+
+  const handlePasswordChange = (value) => {
+    setPassword(value);
+  
+    // Check if the entered password is at least 8 characters long
+    const isValidPassword = value.length >= 8;
+  
+    // Update state to indicate whether password is valid
+    setIsPasswordValid(isValidPassword);
   };
   const { updateToken } = useContext(AuthContext)
   const handleSignUp = async() => {
@@ -30,14 +54,61 @@ export default function SignUpScreen({navigation}) {
       <Text style={styles.welcomeText}>Hello! Welcome Back</Text>
       <Text style={styles.welcomeText}>{process.env.API_BACKEND_BASE_URL}</Text>
       <View style={styles.inputBox}>
-        <TextInput placeholder="Enter your name" style={styles.input} onChangeText={(value) => setName(value)} />
+      <FloatingLabelInput
+                label="Enter Your Account"
+                value={name}
+                keyboardType="ascii-capable"
+                onChangeText={value => setName(value)}
+                customLabelStyles={{colorFocused:"#717171",colorBlurred:"#717171"}}
+                containerStyles={{
+                    borderWidth: 1,
+                    paddingHorizontal: 8,
+                    backgroundColor: '#ffffff',
+                    borderColor: '#E1E1E1',
+                    borderRadius: 8,
+                    marginBottom:8,
+                    height: 60
+                }}
+            />
       </View>
       <View style={styles.inputBox}>
-        <TextInput placeholder="Enter your Username" style={styles.input} onChangeText={(value) => setUsername(value)} />
+      <FloatingLabelInput
+            label="Enter Your Email"
+            value={username}
+            keyboardType="ascii-capable"
+            onChangeText={handleUsernameChange}
+            customLabelStyles={{colorFocused:"#717171",colorBlurred:"#717171"}}
+            containerStyles={{
+                  borderWidth: 1,
+                  paddingHorizontal: 8,
+                  backgroundColor: '#ffffff',
+                  borderColor: isEmailValid ? '#E1E1E1' : 'red',
+                  borderRadius: 8,
+                  marginBottom: 8,
+                  height: 60
+      }}
+    />
       </View>
       <Text style={styles.passwordInfo}>You will use this email address to log in.</Text>
       <View style={styles.inputBox}>
-        <TextInput placeholder="Enter your Password" secureTextEntry={!showPassword} style={styles.input} onChangeText={(value) => setPassword(value)} />
+      <FloatingLabelInput
+            label="Enter Your Password"
+            value={password}
+            keyboardType="ascii-capable"
+            secureTextEntry={!showPassword}
+            onChangeText={handlePasswordChange}
+            customLabelStyles={{colorFocused:"#717171",colorBlurred:"#717171"}}
+            containerStyles={{
+                  borderWidth: 1,
+                  paddingHorizontal: 8,
+                  backgroundColor: '#ffffff',
+                  borderColor: isPasswordValid ? '#E1E1E1' : 'red',
+                  borderRadius: 8,
+                  marginBottom: 8,
+                  height: 60
+                }}
+    />
+       
         <TouchableOpacity style={styles.showButton} onPress={toggleShowPassword}>
           <Text style={styles.showButtonText}>{showPassword ? 'Hide' : 'Show'}</Text>
         </TouchableOpacity>
@@ -93,9 +164,6 @@ const styles = StyleSheet.create({
     height: 58,
     paddingHorizontal: 12,
     paddingVertical: 10,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#E1E1E1',
     borderRadius: 6,
     flexDirection: 'row',
     alignItems: 'center',
@@ -109,8 +177,8 @@ const styles = StyleSheet.create({
   },
   showButton: {
     padding: 8,
-    marginLeft: 10,
-    
+    right: 70,
+    bottom:3,
     borderRadius: 6,
   },
   showButtonText: {
@@ -128,11 +196,12 @@ const styles = StyleSheet.create({
     color: '#717171',
     marginTop: 8,
     top:20,
+    left:15,
   },
   signUpButton: {
     paddingHorizontal: 32,
     paddingVertical: 0,
-    width: 343,
+    width: 320,
     height: 48,
     backgroundColor: '#4B61DD',
     borderWidth: 1,
