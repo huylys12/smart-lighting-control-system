@@ -60,13 +60,24 @@ export default function HomeRoomScreen({ navigation, route }) {
         console.log('Failed to connect to Adafruit: ', message.errorMessage);
       },
     });
-    client.onMessageArrived = (message) => {
+    client.onMessageArrived = async (message) => {
       console.log('Message arrived on topic:', message.destinationName, message.payloadString);
       if(message.destinationName == `PhucHo/feeds/${brightnessFK}`){
         setBrightness(message.payloadString);
+        if(parseInt(message.payloadString) <= 20){
+          await api.post({url:'api/notifications/create',data:`title=${name} is too dark`,token:token});
+          reRender();
+        }else if(parseInt(message.payloadString) >= 70){
+          await api.post({url:'api/notifications/create',data:`title=${name} is too bright`,token:token});
+          reRender();
+        }
         // console.log("hello there");
       }else if(message.destinationName == `PhucHo/feeds/${motionFK}`){
         setPeopleInHere(message.payloadString);
+        if(message.payloadString == "No one"){
+          await api.post({url:'api/notifications/create',data:`title=No one in ${name}`,token:token});
+          reRender();
+        }
       }
     }
     return () => {

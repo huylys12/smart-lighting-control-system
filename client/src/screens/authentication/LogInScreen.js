@@ -203,8 +203,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 6,
     marginBottom: 10,
-    flexDirection: "collumn",
-    alignItems: "left",
+    flexDirection: "column",
+    alignItems: "flex-start",
     top: 20,
   },
   input: {
