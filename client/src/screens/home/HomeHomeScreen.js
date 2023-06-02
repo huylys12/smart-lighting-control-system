@@ -14,9 +14,12 @@ import GroupsOutlineIcon from "react-native-vector-icons/MaterialIcons";
 import RoomContainer from "../../components/RoomContainer";
 import { AuthContext } from "../../context/AuthContext";
 import * as api from "../../api/api";
+import Paho from 'paho-mqtt';
+import { ADAFRUIT_KEY,ADAFRUIT_USER } from "../../../secret";
 
 export default function HomeHomeScreen({ navigation, route }) {
-  const {token, refresh} = useContext(AuthContext);
+  const client = new Paho.Client('wss://io.adafruit.com:443/mqtt/', '');
+  const {token, refresh,reRender} = useContext(AuthContext);
 
   const [roomList,setRoomList] = useState([]);
 
@@ -24,10 +27,58 @@ export default function HomeHomeScreen({ navigation, route }) {
     const fetchData = async() =>{
       const res = await api.get({url:"api/rooms/all",token:token});
       setRoomList(res.rooms);
+      
     }
     fetchData();
   },[token,refresh]);
 
+  useEffect(() =>{
+    client.connect({
+      useSSL: true,
+      userName: ADAFRUIT_USER,
+      password: ADAFRUIT_KEY,
+      onSuccess: () => {
+        console.log('Connected to Adafruit');
+        roomList.map((room) => {
+          client.subscribe(`PhucHo/feeds/${room.brightnessFeedKey}`);
+          client.subscribe(`PhucHo/feeds/${room.motionFeedKey}`);
+        })
+      },
+      onFailure: (message) => {
+        console.log('Failed to connect to Adafruit: ', message.errorMessage);
+      },
+    });
+    client.onMessageArrived = async (message) => {
+      console.log('Message arrived on topic:', message.destinationName, message.payloadString);
+      const fk = message.destinationName.split('/').at(-1);
+      const filter_roomlist = roomList.filter((room) => room.brightnessFeedKey == fk || room.motionFeedKey == fk);
+      console.log(filter_roomlist);
+      if(filter_roomlist.length){
+        if(fk == filter_roomlist[0].brightnessFeedKey){
+          const brightness = parseInt(message.payloadString);
+          await api.patch({url:`api/rooms/${filter_roomlist[0]._id}/update`,
+                                            data:`brightness=${brightness}`,
+                                            token: token});
+          if(brightness <= 20){
+            await api.post({url:'api/notifications/create',data:`title=${filter_roomlist[0].name} is too dark`,token:token});
+          }else if(brightness >= 70){
+            await api.post({url:'api/notifications/create',data:`title=${filter_roomlist[0].name} is too bright`,token:token});
+          }
+          reRender();
+          // console.log("hello there");
+        }else if(fk == filter_roomlist[0].motionFeedKey){
+          const peopleInHere = message.payloadString;
+          await api.patch({url:`api/rooms/${filter_roomlist[0]._id}/update`,
+                                            data:`peopleInHere=${peopleInHere}`,
+                                            token: token});
+          if(peopleInHere == "No one"){
+            await api.post({url:'api/notifications/create',data:`title=No one in ${filter_roomlist[0].name}`,token:token});
+          }
+          reRender();
+        }
+      }
+    }
+  },[roomList.length]);
   const handleTapAddRoom = () => {
     return navigation.navigate("HomeAddRoom");
   }
