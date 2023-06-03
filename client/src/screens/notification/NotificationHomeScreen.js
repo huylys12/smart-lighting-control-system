@@ -24,16 +24,28 @@ export default function NotificationHomeScreen({ navigation }) {
           <View>
             <Text style={style.title}>New</Text>
             {
-              notifies.map((notify) => (
+              notifies.map((notify) => {
+                const date = new Date(notify.createdAt).toString();
+                const time = date.split(" ")[4]+" "+date.split(" ")[1]+"-"+date.split(" ")[2]+"-"+date.split(" ")[3];
+                return notify.title.split(" ")[0] == "The" ? (
                 <NotificationContainer
                   text={notify.title}
-                  hour={"5m ago"}
+                  hour={time}
                   name={"alert-circle-outline"}
                   color={"#599BF9"}
                   bgcolor={"#E1E1E1"}
                   key={notify._id}
+                /> ): (
+                  <NotificationContainer
+                  text={notify.title}
+                  hour={time}
+                  name={"warning-outline"}
+                  color={"#599BF9"}
+                  bgcolor={"#E1E1E1"}
+                  key={notify._id}
                 />
-              ))
+                )
+                })
             }
             {/* <NotificationContainer
               text={"Brightness of living room is just too low"}

@@ -15,13 +15,13 @@ import LightContainer from "../../components/LightContainer";
 import RoomInfo from "../../components/RoomInfo";
 import { AuthContext } from "../../context/AuthContext";
 import * as api from "../../api/api";
-import Paho from 'paho-mqtt';
+// import Paho from 'paho-mqtt';
 import { ADAFRUIT_USER, ADAFRUIT_KEY } from "../../../secret";
 
 
 
 export default function HomeRoomScreen({ navigation, route }) {
-  const client = new Paho.Client('wss://io.adafruit.com:443/mqtt/', '');
+  // const client = new Paho.Client('wss://io.adafruit.com:443/mqtt/', '');
   const {token, refresh, reRender} = useContext(AuthContext);
   const { name,roomId, brightnessFK,motionFK } = route.params;
   

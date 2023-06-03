@@ -60,9 +60,9 @@ export default function HomeHomeScreen({ navigation, route }) {
                                             data:`brightness=${brightness}`,
                                             token: token});
           if(brightness <= 20){
-            await api.post({url:'api/notifications/create',data:`title=${filter_roomlist[0].name} is too dark`,token:token});
+            await api.post({url:'api/notifications/create',data:`title=The ${filter_roomlist[0].name} is too dark`,token:token});
           }else if(brightness >= 70){
-            await api.post({url:'api/notifications/create',data:`title=${filter_roomlist[0].name} is too bright`,token:token});
+            await api.post({url:'api/notifications/create',data:`title=The ${filter_roomlist[0].name} is too bright`,token:token});
           }
           reRender();
           // console.log("hello there");
