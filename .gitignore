@@ -4,5 +4,8 @@ server/.env
 client/node_modules/
 client/.expo/
 client/package-lock.json
+# client/secret.js
+# server/secret.js
+# simulator/secret.js
 # macOS
 .DS_Store

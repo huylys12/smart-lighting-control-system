@@ -1,0 +1,1 @@
+export const ADAFRUIT_KEY = 'aio_hOIa48qXDrEe9aBCN3RIzRZNbnwx'; //fsf

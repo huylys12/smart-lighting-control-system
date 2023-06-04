@@ -15,13 +15,13 @@ import LightContainer from "../../components/LightContainer";
 import RoomInfo from "../../components/RoomInfo";
 import { AuthContext } from "../../context/AuthContext";
 import * as api from "../../api/api";
-import Paho from 'paho-mqtt';
+// import Paho from 'paho-mqtt';
 import { ADAFRUIT_USER, ADAFRUIT_KEY } from "../../../secret";
 
 
 
 export default function HomeRoomScreen({ navigation, route }) {
-  const client = new Paho.Client('wss://io.adafruit.com:443/mqtt/', '');
+  // const client = new Paho.Client('wss://io.adafruit.com:443/mqtt/', '');
   const {token, refresh, reRender} = useContext(AuthContext);
   const { name,roomId, brightnessFK,motionFK } = route.params;
   
@@ -39,7 +39,7 @@ export default function HomeRoomScreen({ navigation, route }) {
     const fetchData = async() => {
       const res = await api.get({url:`api/lights/room/${roomId}`,
                                 token: token});
-      // if(res) console.log(res);
+      if(res) console.log(res);
       setLightList(res.lights);
     }
     fetchData();
@@ -47,39 +47,52 @@ export default function HomeRoomScreen({ navigation, route }) {
   },[token,roomId,refresh]);
 
   useEffect(() => {
-    client.connect({
-      useSSL: true,
-      userName: ADAFRUIT_USER,
-      password: ADAFRUIT_KEY,
-      onSuccess: () => {
-        console.log('Connected to Adafruit');
-        client.subscribe(`PhucHo/feeds/${brightnessFK}`);
-        client.subscribe(`PhucHo/feeds/${motionFK}`);
-      },
-      onFailure: (message) => {
-        console.log('Failed to connect to Adafruit: ', message.errorMessage);
-      },
-    });
-    client.onMessageArrived = (message) => {
-      console.log('Message arrived on topic:', message.destinationName, message.payloadString);
-      if(message.destinationName == `PhucHo/feeds/${brightnessFK}`){
-        setBrightness(message.payloadString);
-        // console.log("hello there");
-      }else if(message.destinationName == `PhucHo/feeds/${motionFK}`){
-        setPeopleInHere(message.payloadString);
-      }
+    const fetchData = async() => {
+      const res = await api.get({url:`api/rooms/all`,token: token});
+      const room = res.rooms.filter((room) => room._id == roomId);
+      console.log(room);
+      setBrightness(parseInt(room[0].brightness));
+      setPeopleInHere(room[0].peopleInHere);
+      // console.log(room,'from home room');
+      // console.log(res_2);
+      // reRender();
     }
-    return () => {
-      client.disconnect({
-        onSuccess: function() {
-          console.log("Disconnected successfully.");
-        },
-        onFailure: function(err) {
-          console.log("Disconnect failed: " + err.errorMessage);
-        }
-      });
-    }
-  },[]);
+    fetchData();
+  },[refresh,token,roomId])
+  // useEffect(() => {
+  //   client.connect({
+  //     useSSL: true,
+  //     userName: ADAFRUIT_USER,
+  //     password: ADAFRUIT_KEY,
+  //     onSuccess: () => {
+  //       console.log('Connected to Adafruit');
+  //       client.subscribe(`PhucHo/feeds/${brightnessFK}`);
+  //       client.subscribe(`PhucHo/feeds/${motionFK}`);
+  //     },
+  //     onFailure: (message) => {
+  //       console.log('Failed to connect to Adafruit: ', message.errorMessage);
+  //     },
+  //   });
+  //   client.onMessageArrived = async (message) => {
+  //     console.log('Message arrived on topic:', message.destinationName, message.payloadString);
+  //     if(message.destinationName == `PhucHo/feeds/${brightnessFK}`){
+  //       setBrightness(message.payloadString);
+  //       // console.log("hello there");
+  //     }else if(message.destinationName == `PhucHo/feeds/${motionFK}`){
+  //       setPeopleInHere(message.payloadString);
+  //     }
+  //   }
+  //   return () => {
+  //     client.disconnect({
+  //       onSuccess: function() {
+  //         console.log("Disconnected successfully.");
+  //       },
+  //       onFailure: function(err) {
+  //         console.log("Disconnect failed: " + err.errorMessage);
+  //       }
+  //     });
+  //   }
+  // },[]);
   useEffect(() => {
     const fetchData = async() => {
       // console.log(motionFK,brightnessFK);
@@ -107,11 +120,12 @@ export default function HomeRoomScreen({ navigation, route }) {
       const res_2 = await api.patch({url:`api/rooms/${roomId}/update`,
                                     data:`brightness=${brightness}&peopleInHere=${peopleInHere}`,
                                     token: token});
-      console.log(res_2);
+      // console.log(res_2);
       // reRender();
     }
     fetchData();
   },[brightness,peopleInHere]);
+  
   return (
     <View style={styles.container}>
       <View style={styles.infoGrid}>
