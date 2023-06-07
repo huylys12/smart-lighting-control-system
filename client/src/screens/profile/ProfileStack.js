@@ -16,11 +16,11 @@ export default function ProfileStack() {
         name="ProfileEdit"
         component={ProfileEditScreen}
       />
-      <HistoryStack.Screen
+      {/* <HistoryStack.Screen
         name="NotificationTO"
         component={NotificationTOScreen}
         options={{headerShown:true}}
-      />
+      /> */}
     </HistoryStack.Navigator>
   );
 }
