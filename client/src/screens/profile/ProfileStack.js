@@ -1,6 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ProfileHomeScreen from "./ProfileHomeScreen";
 import ProfileEditScreen from "./ProfileEditScreen";
+import NotificationTOScreen from "./NotificationTOScreen";
+
 const HistoryStack = createNativeStackNavigator();
 
 export default function ProfileStack() {
@@ -14,6 +16,11 @@ export default function ProfileStack() {
         name="ProfileEdit"
         component={ProfileEditScreen}
       />
+      {/* <HistoryStack.Screen
+        name="NotificationTO"
+        component={NotificationTOScreen}
+        options={{headerShown:true}}
+      /> */}
     </HistoryStack.Navigator>
   );
 }
