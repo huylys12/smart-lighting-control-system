@@ -15,13 +15,34 @@ import ProfilePower from "../../components/ProfilePower";
 import * as api from "../../api/api";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 
 export default function ProfileHomeScreen({ navigation }) {
-  const { token } = useContext(AuthContext);
-
+  const { token,refresh } = useContext(AuthContext);
+  const [username,setUsername] = useState('');
+  const [userava,setUserava] = useState('');
+  useEffect(() => {
+    const getdata = async() => {
+      const res = await api.get({ url: "api/accounts/me", token: token });
+    
+      console.log("Name: ", res);
+    if(res){
+      setUsername(res.name);
+      setUserava(res.avatar);
+      console.log(res.name);
+      console.log(res.avatar);
+    }
+    }
+    getdata();
+  }, [refresh])
   const handleTabEditProfile = () => {
-    return navigation.navigate("Edit Profile");
+    return navigation.navigate("ProfileEdit");
   };
+  const handleNoti = () =>{
+    return navigation.navigate("NotificationTO");
+  }
+
   const handleLogout = async () => {
     const res = await api.get({ url: "api/accounts/logout", token: token });
     if (res) {
@@ -32,25 +53,22 @@ export default function ProfileHomeScreen({ navigation }) {
   return (
     <View style={style.container}>
       <View>
-        <ProfileName name={"Harry Brown"} />
+        <ProfileName name={username} avata={userava}/>
         <ProfilePower poweruse={"219 kwh"} />
       </View>
       <Text style={{ fontSize: 22, fontWeight: 600, marginTop: 16 }}>
         Setting
       </Text>
       <ScrollView>
+      <TouchableOpacity onPress={handleNoti}>
         <NotificationContainer
           text={"Notification"}
           hour={"Manage the way we send you all the notifications"}
           name={"notifications"}
           color={"#384EC7"}
         />
-        <NotificationContainer
-          text={"Automation"}
-          hour={"Permit the app control your lights"}
-          name={"calendar-outline"}
-          color={"#599BF9"}
-        />
+        </TouchableOpacity>
+        
         <TouchableOpacity onPress={handleTabEditProfile}>
           <NotificationContainer
             text={"Profile"}
