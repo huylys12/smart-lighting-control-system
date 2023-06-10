@@ -1,3 +1,16 @@
+# Smart Lighting Control System With React Native
+
+<p>
+  <!-- iOS -->
+  <a href="https://itunes.apple.com/app/apple-store/id982107779">
+    <img alt="Supports Expo iOS" longdesc="Supports Expo iOS" src="https://img.shields.io/badge/iOS-4630EB.svg?style=flat-square&logo=APPLE&labelColor=999999&logoColor=fff" />
+  </a>
+  <!-- Android -->
+  <a href="https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=blankexample">
+    <img alt="Supports Expo Android" longdesc="Supports Expo Android" src="https://img.shields.io/badge/Android-4630EB.svg?style=flat-square&logo=ANDROID&labelColor=A4C639&logoColor=fff" />
+  </a>
+</p>
+
 ## Installation Instructions: React Native and Expo
 
 Follow the steps below to install React Native and Expo on your local machine.
@@ -10,12 +23,6 @@ Make sure you have the following prerequisites installed:
       npm --version
 
 
-### React Native CLI Installation
-Install React Native CLI by running the following command in your terminal:<br>
-  
-     npm install -g react-native-cli
-
-
 ### Expo CLI Installation
 Install Expo CLI by running the following command in your terminal:<br>
   
@@ -23,8 +30,9 @@ Install Expo CLI by running the following command in your terminal:<br>
 
 
 ### Start the Project with Expo
-To start the React Native project with Expo, navigate into your project directory and run the following command:
+To start the React Native project with Expo, navigate into your project directory and run the following commands:
 
+      npm install
       expo start
 
 
