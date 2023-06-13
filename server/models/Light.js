@@ -37,7 +37,9 @@ const lightSchema = mongoose.Schema({
   },
   brightnessFeedKey: String,
   colorFeedKey: String,
-  statusFeedKey: String
+  statusFeedKey: String,
+  timeStart: Number,
+  totalTimeUsed: Number
 });
 
 //////=========================================================================

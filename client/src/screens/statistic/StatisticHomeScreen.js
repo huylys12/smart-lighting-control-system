@@ -1,5 +1,5 @@
 import { Dimensions, ScrollView, StyleSheet, Text, View} from 'react-native';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 // import { VictoryChart, VictoryBar, VictoryGroup, VictoryAxis } from "victory-native";
 import Statistic from '../../components/Statistic';
@@ -33,7 +33,8 @@ const data = {
   ]
 }
 export default function StatisticHomeScreen({navigation }) {
-  const [selected,setSelected] = useState('Week')
+  const [selected,setSelected] = useState('Week');
+  
   return (
     <ScrollView style={{backgroundColor:"white"}}>
       <View style={{marginHorizontal: 10}}>

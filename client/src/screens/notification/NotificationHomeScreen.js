@@ -24,7 +24,7 @@ export default function NotificationHomeScreen({ navigation }) {
           <View>
             <Text style={style.title}>New</Text>
             {
-              notifies.map((notify) => {
+              notifies.reverse().map((notify) => {
                 const date = new Date(notify.createdAt).toString();
                 const time = date.split(" ")[4]+" "+date.split(" ")[1]+"-"+date.split(" ")[2]+"-"+date.split(" ")[3];
                 return notify.title.split(" ")[0] == "The" ? (
@@ -32,7 +32,7 @@ export default function NotificationHomeScreen({ navigation }) {
                   text={notify.title}
                   hour={time}
                   name={"alert-circle-outline"}
-                  color={"#599BF9"}
+                  color={"#FFAC3D"}
                   bgcolor={"#E1E1E1"}
                   key={notify._id}
                 /> ): (
@@ -40,7 +40,7 @@ export default function NotificationHomeScreen({ navigation }) {
                   text={notify.title}
                   hour={time}
                   name={"warning-outline"}
-                  color={"#599BF9"}
+                  color={"#D82F0F"}
                   bgcolor={"#E1E1E1"}
                   key={notify._id}
                 />
